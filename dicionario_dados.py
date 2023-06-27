@@ -130,163 +130,163 @@ def dic():
         },
         {
             'Número':26,
-            'Coluna': 'map_apache',
-            'Descrição': '...'
+            'Coluna': 'pressao_arterial_apache',
+            'Descrição': 'Pressão arterial media medida durante as primeiras 24 horas de internação '
         },
         {
             'Número':27,
             'Coluna': 'frequencia_respiratoria_pache',
-            'Descrição':'...'
+            'Descrição':'Frequencia respiratória média medida durante as primeiras 24 horas.'
         },
         {
             'Número':28,
             'Coluna': 'temperatura_apache',
-            'Descrição':'...'
+            'Descrição':'Temperatura média medida durante as primeiras 24 horas'
         },
         {
             'Número':29,
             'Coluna': 'ventilado_apache',
-            'Descrição':'...'
+            'Descrição':'Se o paciente precisou ser ventilado de forma invasiva por meio de traqueostomia'
         },
         {
             'Número':30,
             'Coluna': 'd1_pressao_arterial_diastolica_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva ou não'
         },
         {
             'Número':31,
             'Coluna': 'd1_pressao_arterial_diastolica_minima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial diastólica mais baixa do paciente medida durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
         },
         {
             'Número':32,
             'Coluna': 'd1_pressao_arterial_diastolica_nao_invasiva_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva '
         },
         {
             'Número':33,
             'Coluna': 'd1_pressao_arterial_diastólica_nao_invasiva_minima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva'
         },
         {
             'Número':34,
             'Coluna': 'd1_frequencia_cardiaca_maxima',
-            'Descrição':'...'
+            'Descrição':'Frequencia cardiaca máxima medida durante as primeiras 24 horas'
         },
         {
             'Número':35,
             'Coluna': 'd1_frequencia_cardiaca_minima',
-            'Descrição':'...'
+            'Descrição':'Frequencia cardiaca mínima medida durante as primerias 24 horas'
         },
         {
             'Número':36,
             'Coluna':  'd1_pressao_arterial_media_maxima',
-            'Descrição':'...'
+            'Descrição':'Maior pressão arterial media do paciente nas primeiras 24 horas de internação'
         },
         {
             'Número':37,
             'Coluna': 'd1_pressao_arterial_media_minima',
-            'Descrição':'...'
+            'Descrição':'Menor pressão arterial media do paciente nas primeiras 24 horas de internação'
         },
         {
             'Número':38,
             'Coluna': 'd1_pressao_arterial_media_nao_invasiva_maxima',
-            'Descrição':'...'
+            'Descrição':'Maior pressão arterial media não invasiva do paciente nas primeiras 24 horas de internação '
         },
         {
             'Número':39,
             'Coluna': 'd1_pressao_arterial_media_nao_invasiva_minima',
-            'Descrição':'...'
+            'Descrição':'Menor pressão arterial media não invasiva do paciente nas primeiras 24 horas de internação'
         },
         {
             'Número':40,
             'Coluna': 'd1_frequencia_respiratoria_maxima',
-            'Descrição':'...'
+            'Descrição':'Maior frequencia respiratoria do paciente nas primeiras 24 horas de internação'
         },
         {
             'Número':41,
             'Coluna': 'd1_frequencia_respiratoria_minima',
-            'Descrição':'...'
+            'Descrição':'Menor frequencia respiratoria do paciente nas primeiras 24 horas de internação'
         },
         {
             'Número':42,
             'Coluna': 'd1_spO2_maximo',
-            'Descrição':'...'
+            'Descrição':'A saturação periférica de oxigênio mais alta do paciente durante as primeiras 24 horas de internação'
         },
         {
             'Número':43,
             'Coluna': 'd1_spO2_minimo',
-            'Descrição':'...'
+            'Descrição':'A saturação periférica de oxigênio mais baixa do paciente durante as primeiras 24 horas de internação'
         },
         {
             'Número':44,
             'Coluna': 'd1_pressao_arterial_sistolica_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais alta registrada durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
         },
         {
             'Número':45,
             'Coluna': 'd1_pressao_arterial_sistolica_minima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais baixa registrada durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
         },
         {
             'Número':46,
             'Coluna': 'd1_pressao_arterial_sistolica_nao_invasiva_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais alta registrada durante as primeiras 24 horas de internação, medida de forma  invasiva '
         },
         {
             'Número':47,
             'Coluna': 'd1_pressao_arterial_sistolica_nao_invasiva_minima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais baixa registrada durante as primeiras 24 horas de internação, medida de forma  invasiva'
         },
         {
             'Número':48,
             'Coluna': 'd1_temperatura_maxima',
-            'Descrição':'...'
+            'Descrição':'A temperatura corporal mais alta do paciente durante as primeiras 24 horas de internação medida de forma invasiva'
         },
         {
             'Número':49,
             'Coluna': 'd1_temperatura_minima',
-            'Descrição':'...'
+            'Descrição':'A temperatura corporal mais baixa do paciente durante as primeiras 24 horas de internação medida de forma invasiva'
         },
         {
             'Número':50,
             'Coluna': 'h1_pressão_arterial_diastolica_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais alta registrada durante a primeira 1 hora de internação, medida de forma  invasiva ou não'
         },
         {
             'Número':51,
-            'Coluna': 'h1_pressao_arterial_iastolica_minima',
-            'Descrição':'...'
+            'Coluna': 'h1_pressao_arterial_diastolica_minima',
+            'Descrição':'A pressão arterial sistolica mais baixa registrada durante a primeira 1 hora de internação, medida de forma  invasiva ou não'
         },
         {
             'Número':52,
             'Coluna': 'd1_pressao_arterial_diastolica_nao_invasiva_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais alta registrada durante a primeira 1 hora de internação, medida de forma  invasiva'
         },
         {
             'Número':53,
             'Coluna': 'd1_pressao_arterial_diastólica_nao_invasiva_minima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistolica mais baixa registrada durante a primeira 1 hora de internação, medida de forma  invasiva'
         },
         {
             'Número':54,
             'Coluna': 'd1_frequencia_cardiaca_maxima',
-            'Descrição':'...'
+            'Descrição':'Frequencia cardíaca mais alta registrada na primeira 1 hora de internação'
         },
         {
             'Número':55,
             'Coluna':  'd1_frequencia_cardiaca_minima',
-            'Descrição':'...'
+            'Descrição':'Frequencia cardíaca mais baixa registrada na primeira 1 hora de internação'
         },
         {
             'Número':56,
             'Coluna': 'd1_pressao_arterial_media_maxima',
-            'Descrição':'...'
+            'Descrição':'Pressão arterial média mais alta registrada durante a primeira 1 hora de internação'
         },
         {
             'Número':57,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'd1_pressão_arterial_media_minima',
+            'Descrição':'Frequencia cardíaca mais baixa registrada na primeira 1 hora de internação'
         },
         {
             'Número':58,
