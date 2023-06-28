@@ -51,6 +51,23 @@ def graficos():
     plt.xlabel("Etnia")
     plt.ylabel("Contagem")
     st.pyplot(fig)
+
+    fonte_admissao_uti_count = df['fonte_admissao_uti'].value_counts()
+    fig = plt.figure(figsize = (8, 6))
+    df['fonte_admissao_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
+    plt.title("Tipos de Admissão na UTI")
+    plt.xlabel("Admissão")
+    plt.ylabel("Contagem")
+    st.pyplot(fig)
+
+    tipo_de_estadia_count = df['tipo_estadia_uti'].value_counts()
+    df['tipo_estadia_uti'].replace({'admit':'Admitido', 'readmit':'Readmitido', 'transfer':'Transferido'})
+    fig = plt.figure(figsize = (8, 6))
+    df['tipo_estadia_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
+    plt.title("Tipos de Estadia UTI")
+    plt.xlabel("Estadia")
+    plt.ylabel("Contagem")
+    st.pyplot(fig)
     
     doencas = st.selectbox("Selecione a doença", options = ('aids','cirrose', 'diabetes_mellitus', 'insuficiencia_hepatica',
                                                               'imunossupressao','leucemia',
