@@ -29,18 +29,18 @@ def home():
 def graficos():
     st.title('Graficos do dataset Patient Survival Prediction')
     df = pd.read_parquet("data/dataset_renomeado.parquet")
-   
-    genero_proporcao = df['genero'].value_counts(normalize=True)*100
+    plt.style.use("ggplot")
     
+    genero_proporcao = df['genero'].value_counts(normalize=True)*100
     fig = plt.figure(figsize=(8, 6))
     genero_proporcao.plot(kind='pie')
     plt.xlabel('Gênero')
     plt.ylabel('Contagem')
     plt.title('Proporção por Gêneros')
     st.pyplot(fig)
-    
+
+
     etinia_count = df['etnia'].value_counts()
-    plt.style.use("ggplot")
     fig = plt.figure(figsize = (8, 6))
     df["etnia"].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
     plt.title("Distribuição de Etnias")
