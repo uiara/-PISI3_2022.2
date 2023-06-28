@@ -39,6 +39,15 @@ def graficos():
     plt.title('Proporção por Gêneros')
     st.pyplot(fig)
     
+    etinia_count = df['etnia'].value_counts()
+    plt.style.use("ggplot")
+    fig = plt.figure(figsize = (8, 6))
+    df["etnia"].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
+    plt.title("Distribuição de Etnias")
+    plt.xlabel("Etnia")
+    plt.ylabel("Contagem")
+    st.pyplot(fig)
+    
 # Seletor de página
 pages = {
     'Página 1 - Introdução': home,
