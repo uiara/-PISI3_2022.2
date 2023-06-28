@@ -29,9 +29,10 @@ def home():
 def graficos():
     st.title('Graficos do dataset Patient Survival Prediction')
     df = pd.read_parquet("data/dataset_renomeado.parquet")
-    plt.style.use("ggplot")
-    
+   
     genero_proporcao = df['genero'].value_counts(normalize=True)*100
+
+    plt.style.use("ggplot")
     fig = plt.figure(figsize=(8, 6))
     genero_proporcao.plot(kind='pie')
     plt.xlabel('Gênero')
@@ -47,20 +48,32 @@ def graficos():
     plt.xlabel("Etnia")
     plt.ylabel("Contagem")
     st.pyplot(fig)
-
+    
     doencas = st.selectbox("Selecione a doença", options = ('aids','cirrose', 'diabetes_mellitus', 'insuficiencia_hepatica',
                                                               'imunossupressao','leucemia',
                                                               'linfoma','tumor_solido_com_metastase')
     )
 
-    doencas_counts = df[df[doencas == 1]].groupby('age').size().reset_index(name='total_pessoas_com_{doencas}')
+    doencas_counts = df[df[doencas] == 1].groupby('idade').size().reset_index(name = f'total_pessoas_com_{doencas}')
 
-    fig= px.scatter(doencas_counts, x = 'age', y='total_pessoas_com_{doencas}')
+    fig= px.scatter(doencas_counts, x = 'idade', y = f'total_pessoas_com_{doencas}')
 
     fig.update_layout(
-        title='Total de Pessoas com Leucemia por Idade',
-        xaxis_title='Idade',
-        yaxis_title = 'Total de Pessoas com {doencas}',
+        title = f'Total de Pessoas com {doencas} por Idade',
+        xaxis_title = 'Idade',
+        yaxis_title = f'Total de Pessoas com {doencas}',
+    )
+
+    st.plotly_chart(fig)
+    ##
+    doencas_counts = df[df[doencas] == 1].groupby('imc').size().reset_index(name = f'total_pessoas_com_{doencas}')
+
+    fig= px.scatter(doencas_counts, x = 'imc', y = f'total_pessoas_com_{doencas}')
+
+    fig.update_layout(
+        title = f'IMC de pessoas com {doencas}',
+        xaxis_title = 'IMC',
+        yaxis_title = f'Total de Pessoas com {doencas}',
     )
 
     st.plotly_chart(fig)
