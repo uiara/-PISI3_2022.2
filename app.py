@@ -98,23 +98,13 @@ def home():
     # Exibição do Sunburst Plot no Streamlit
     with col2:
         st.plotly_chart(fig, use_container_width=True)
-
-
-    # Remover linhas com valores ausentes nas colunas "idade" e "imc"
-    #df_cleaned = df.dropna(subset=['idade'])
-
-    # Criar o Treemap usando o plotly.express
-    #fig = px.treemap(df_cleaned, path=['idade', 'morte_hospital'])
-
-    # Exibir o Treemap no Streamlit
-    #st.plotly_chart(fig, use_container_width=True)
-
-    fonte_admissao_uti_count = df['fonte_admissao_uti'].value_counts()
-    fig = plt.figure(figsize = (6, 4))
-    fonte_admissao_uti_count.plot(kind='pie')
-    plt.title("Tipos de Admissão na UTI")
-    plt.xlabel("Admissão")
-    #plt.ylabel("Contagem")
+    
+    genero_proporcao = df['genero'].value_counts(normalize=True)*100
+    fig = plt.figure(figsize=(8, 6))
+    genero_proporcao.plot(kind='pie')
+    plt.xlabel('Gênero')
+    plt.ylabel('Contagem')
+    plt.title('Proporção por Gêneros')
     st.pyplot(fig)
 
     
@@ -134,7 +124,23 @@ def home():
     plt.xlabel("Etnia")
     plt.ylabel("Contagem")
     st.pyplot(fig)
+    fonte_admissao_uti_count = df['fonte_admissao_uti'].value_counts()
+    fig = plt.figure(figsize = (8, 6))
+    df['fonte_admissao_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
+    plt.title("Tipos de Admissão na UTI")
+    plt.xlabel("Admissão")
+    plt.ylabel("Contagem")
+    st.pyplot(fig)
 
+    tipo_de_estadia_count = df['tipo_estadia_uti'].value_counts()
+    df['tipo_estadia_uti'].replace({'admit':'Admitido', 'readmit':'Readmitido', 'transfer':'Transferido'})
+    fig = plt.figure(figsize = (8, 6))
+    df['tipo_estadia_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
+    plt.title("Tipos de Estadia UTI")
+    plt.xlabel("Estadia")
+    plt.ylabel("Contagem")
+    st.pyplot(fig)
+    
     doencas = st.selectbox("Selecione a doença", options = ('aids','cirrose', 'diabetes_mellitus', 'insuficiencia_hepatica',
                                                               'imunossupressao','leucemia',
                                                               'linfoma','tumor_solido_com_metastase')
@@ -145,9 +151,9 @@ def home():
     fig= px.scatter(doencas_counts, x = 'idade', y='total_pessoas_com_{doencas}')
 
     fig.update_layout(
-        title='Total de Pessoas com Leucemia por Idade',
-        xaxis_title='Idade',
-        yaxis_title = 'Total de Pessoas com {doencas}',
+        title = f'IMC de pessoas com {doencas}',
+        xaxis_title = 'IMC',
+        yaxis_title = f'Total de Pessoas com {doencas}',
     )
     st.plotly_chart(fig)
 
