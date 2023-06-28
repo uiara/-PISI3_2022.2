@@ -1,10 +1,11 @@
 from dicionario_dados import dic
 
-import matplotlib.pyplot as plt
-import plotly.express as px
-import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 
@@ -108,10 +109,26 @@ def home():
     # Exibir o Treemap no Streamlit
     #st.plotly_chart(fig, use_container_width=True)
 
+    fonte_admissao_uti_count = df['fonte_admissao_uti'].value_counts()
+    fig = plt.figure(figsize = (6, 4))
+    fonte_admissao_uti_count.plot(kind='pie')
+    plt.title("Tipos de Admissão na UTI")
+    plt.xlabel("Admissão")
+    #plt.ylabel("Contagem")
+    st.pyplot(fig)
 
+    
+    df['tipo_estadia_uti'] = df['tipo_estadia_uti'].replace({'admit':'Admitido', 'readmit':'Readmitido', 'transfer':'Transferido'})
+    tipo_de_estadia_count = df['tipo_estadia_uti'].value_counts()
+    fig = plt.figure(figsize = (6, 4))
+    tipo_de_estadia_count.plot(kind='pie')
+    plt.title("Tipos de Estadia UTI")
+    plt.xlabel("Estadia")
+    #plt.ylabel("Contagem")
+    st.pyplot(fig)
 
     etinia_count = df['etnia'].value_counts()
-    fig = plt.figure(figsize = (8, 6))
+    fig = plt.figure(figsize = (6, 4))
     df["etnia"].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
     plt.title("Distribuição de Etnias")
     plt.xlabel("Etnia")
@@ -123,15 +140,27 @@ def home():
                                                               'linfoma','tumor_solido_com_metastase')
     )
 
-    doencas_counts = df[df[doencas == 1]].groupby('age').size().reset_index(name='total_pessoas_com_{doencas}')
+    doencas_counts = df[df[doencas] == 1].groupby('idade').size().reset_index(name='total_pessoas_com_{doencas}')
 
-    fig= px.scatter(doencas_counts, x = 'age', y='total_pessoas_com_{doencas}')
+    fig= px.scatter(doencas_counts, x = 'idade', y='total_pessoas_com_{doencas}')
 
     fig.update_layout(
         title='Total de Pessoas com Leucemia por Idade',
         xaxis_title='Idade',
         yaxis_title = 'Total de Pessoas com {doencas}',
     )
+    st.plotly_chart(fig)
+
+    doencas_counts = df[df[doencas] == 1].groupby('imc').size().reset_index(name = f'total_pessoas_com_{doencas}')
+
+    fig= px.scatter(doencas_counts, x = 'imc', y = f'total_pessoas_com_{doencas}')
+
+    fig.update_layout(
+        title = f'IMC de pessoas com {doencas}',
+        xaxis_title = 'IMC',
+        yaxis_title = f'Total de Pessoas com {doencas}',
+    )
+
 
     st.plotly_chart(fig)
 # Seletor de página
@@ -140,6 +169,7 @@ pages = {
     'Página 2 - Dicionário': dic,
     #'Página 3 - Gráficos': gráficos
 }
+
 
 # Título
 st.title('Patient Survival Prediction')
