@@ -47,7 +47,23 @@ def graficos():
     plt.xlabel("Etnia")
     plt.ylabel("Contagem")
     st.pyplot(fig)
-    
+
+    doencas = st.selectbox("Selecione a doença", options = ('aids','cirrose', 'diabetes_mellitus', 'insuficiencia_hepatica',
+                                                              'imunossupressao','leucemia',
+                                                              'linfoma','tumor_solido_com_metastase')
+    )
+
+    doencas_counts = df[df[doencas == 1]].groupby('age').size().reset_index(name='total_pessoas_com_{doencas}')
+
+    fig= px.scatter(doencas_counts, x = 'age', y='total_pessoas_com_{doencas}')
+
+    fig.update_layout(
+        title='Total de Pessoas com Leucemia por Idade',
+        xaxis_title='Idade',
+        yaxis_title = 'Total de Pessoas com {doencas}',
+    )
+
+    st.plotly_chart(fig)
 # Seletor de página
 pages = {
     'Página 1 - Introdução': home,
