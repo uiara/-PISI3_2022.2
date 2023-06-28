@@ -130,303 +130,303 @@ def dic():
         },
         {
             'Número':26,
-            'Coluna': 'pressao_arterial_apache',
-            'Descrição': 'Pressão arterial media medida durante as primeiras 24 horas de internação '
+            'Coluna': 'map_apache',
+            'Descrição': 'A pressão arterial média medida durante as primeiras 24 horas'
         },
         {
             'Número':27,
             'Coluna': 'frequencia_respiratoria_pache',
-            'Descrição':'Frequencia respiratória média medida durante as primeiras 24 horas.'
+            'Descrição':'A frequência respiratória medida durante as primeiras 24 horas'
         },
         {
             'Número':28,
             'Coluna': 'temperatura_apache',
-            'Descrição':'Temperatura média medida durante as primeiras 24 horas'
+            'Descrição':'A temperatura medida durante as primeiras 24 horas'
         },
         {
             'Número':29,
             'Coluna': 'ventilado_apache',
-            'Descrição':'Se o paciente precisou ser ventilado de forma invasiva por meio de traqueostomia'
+            'Descrição':'Se o paciente foi ventilado de forma invasiva no momento da gasometria arterial de maior pontuação'
         },
         {
             'Número':30,
             'Coluna': 'd1_pressao_arterial_diastolica_maxima',
-            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva ou não'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':31,
             'Coluna': 'd1_pressao_arterial_diastolica_minima',
-            'Descrição':'A pressão arterial diastólica mais baixa do paciente medida durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
+            'Descrição':'A pressão arterial diastólica mais baixa do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':32,
             'Coluna': 'd1_pressao_arterial_diastolica_nao_invasiva_maxima',
-            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva '
+            'Descrição':'A pressão arterial diastólica mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':33,
             'Coluna': 'd1_pressao_arterial_diastólica_nao_invasiva_minima',
-            'Descrição':'A pressão arterial diastólica mais alta do paciente medida durante as primeiras 24 horas de internação, medida de forma não invasiva'
+            'Descrição':'A pressão arterial diastólica mais baixa do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':34,
             'Coluna': 'd1_frequencia_cardiaca_maxima',
-            'Descrição':'Frequencia cardiaca máxima medida durante as primeiras 24 horas'
+            'Descrição':'A frequência cardíaca mais alta do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':35,
             'Coluna': 'd1_frequencia_cardiaca_minima',
-            'Descrição':'Frequencia cardiaca mínima medida durante as primerias 24 horas'
+            'Descrição':'A frequência cardíaca mais baixa do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':36,
             'Coluna':  'd1_pressao_arterial_media_maxima',
-            'Descrição':'Maior pressão arterial media do paciente nas primeiras 24 horas de internação'
+            'Descrição':'A pressão arterial média mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':37,
             'Coluna': 'd1_pressao_arterial_media_minima',
-            'Descrição':'Menor pressão arterial media do paciente nas primeiras 24 horas de internação'
+            'Descrição':'A pressão arterial média mais baixa do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':38,
             'Coluna': 'd1_pressao_arterial_media_nao_invasiva_maxima',
-            'Descrição':'Maior pressão arterial media não invasiva do paciente nas primeiras 24 horas de internação '
+            'Descrição':'A pressão arterial média mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':39,
             'Coluna': 'd1_pressao_arterial_media_nao_invasiva_minima',
-            'Descrição':'Menor pressão arterial media não invasiva do paciente nas primeiras 24 horas de internação'
+            'Descrição':'A pressão arterial média mais baixa do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':40,
             'Coluna': 'd1_frequencia_respiratoria_maxima',
-            'Descrição':'Maior frequencia respiratoria do paciente nas primeiras 24 horas de internação'
+            'Descrição':'A frequência respiratória mais alta do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':41,
             'Coluna': 'd1_frequencia_respiratoria_minima',
-            'Descrição':'Menor frequencia respiratoria do paciente nas primeiras 24 horas de internação'
+            'Descrição':'A frequência respiratória mais baixa do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':42,
             'Coluna': 'd1_spO2_maximo',
-            'Descrição':'A saturação periférica de oxigênio mais alta do paciente durante as primeiras 24 horas de internação'
+            'Descrição':'A maior saturação periférica de oxigênio do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':43,
             'Coluna': 'd1_spO2_minimo',
-            'Descrição':'A saturação periférica de oxigênio mais baixa do paciente durante as primeiras 24 horas de internação'
+            'Descrição':'A saturação periférica de oxigênio mais baixa do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':44,
             'Coluna': 'd1_pressao_arterial_sistolica_maxima',
-            'Descrição':'A pressão arterial sistolica mais alta registrada durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
+            'Descrição':'...'
         },
         {
             'Número':45,
             'Coluna': 'd1_pressao_arterial_sistolica_minima',
-            'Descrição':'A pressão arterial sistolica mais baixa registrada durante as primeiras 24 horas de internação, medida de forma invasiva ou não'
+            'Descrição':'A pressão arterial sistólica mais baixa do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':46,
             'Coluna': 'd1_pressao_arterial_sistolica_nao_invasiva_maxima',
-            'Descrição':'A pressão arterial sistolica mais alta registrada durante as primeiras 24 horas de internação, medida de forma  invasiva '
+            'Descrição':'A pressão arterial sistólica mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':47,
             'Coluna': 'd1_pressao_arterial_sistolica_nao_invasiva_minima',
-            'Descrição':'A pressão arterial sistolica mais baixa registrada durante as primeiras 24 horas de internação, medida de forma  invasiva'
+            'Descrição':'A pressão arterial sistólica mais baixa do paciente durante as primeiras 24 horas de internação na unidade, medida de forma invasiva'
         },
         {
             'Número':48,
             'Coluna': 'd1_temperatura_maxima',
-            'Descrição':'A temperatura corporal mais alta do paciente durante as primeiras 24 horas de internação medida de forma invasiva'
+            'Descrição':'A temperatura central mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma invasiva'
         },
         {
             'Número':49,
             'Coluna': 'd1_temperatura_minima',
-            'Descrição':'A temperatura corporal mais baixa do paciente durante as primeiras 24 horas de internação medida de forma invasiva'
+            'Descrição':'A temperatura central mais baixa do paciente durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':50,
             'Coluna': 'h1_pressão_arterial_diastolica_maxima',
-            'Descrição':'A pressão arterial sistolica mais alta registrada durante a primeira 1 hora de internação, medida de forma  invasiva ou não'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':51,
-            'Coluna': 'h1_pressao_arterial_diastolica_minima',
-            'Descrição':'A pressão arterial sistolica mais baixa registrada durante a primeira 1 hora de internação, medida de forma  invasiva ou não'
+            'Coluna': 'h1_pressao_arterial_iastolica_minima',
+            'Descrição':'A pressão arterial diastólica mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':52,
             'Coluna': 'd1_pressao_arterial_diastolica_nao_invasiva_maxima',
-            'Descrição':'A pressão arterial sistolica mais alta registrada durante a primeira 1 hora de internação, medida de forma  invasiva'
+            'Descrição':'A pressão arterial diastólica mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma invasiva'
         },
         {
             'Número':53,
             'Coluna': 'd1_pressao_arterial_diastólica_nao_invasiva_minima',
-            'Descrição':'A pressão arterial sistolica mais baixa registrada durante a primeira 1 hora de internação, medida de forma  invasiva'
+            'Descrição':'A pressão arterial diastólica mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma invasiva'
         },
         {
             'Número':54,
             'Coluna': 'd1_frequencia_cardiaca_maxima',
-            'Descrição':'Frequencia cardíaca mais alta registrada na primeira 1 hora de internação'
+            'Descrição':'A frequência cardíaca mais alta do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':55,
             'Coluna':  'd1_frequencia_cardiaca_minima',
-            'Descrição':'Frequencia cardíaca mais baixa registrada na primeira 1 hora de internação'
+            'Descrição':'A frequência cardíaca mais baixa do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':56,
             'Coluna': 'd1_pressao_arterial_media_maxima',
-            'Descrição':'Pressão arterial média mais alta registrada durante a primeira 1 hora de internação'
+            'Descrição':'A pressão arterial média mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':57,
-            'Coluna': 'd1_pressão_arterial_media_minima',
-            'Descrição':'Frequencia cardíaca mais baixa registrada na primeira 1 hora de internação'
+            'Coluna': 'd1_pressao_arterial_media_minima',
+            'Descrição':'A pressão arterial média mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':58,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'pressão arterial_media_nao_invasiva_maxima',
+            'Descrição':'A pressão arterial média mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':59,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'pressão arterial_media_nao_invasiva_minima',
+            'Descrição':'A pressão arterial média mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':60,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'frequencia_respiratoria_maxima',
+            'Descrição':'A frequência respiratória mais alta do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':61,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'frequencia_respiratoria_minima',
+            'Descrição':'A frequência respiratória mais baixa do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':62,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_spO2_max',
+            'Descrição':'A maior saturação periférica de oxigênio do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':63,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_spO2_min',
+            'Descrição':'A menor saturação periférica de oxigênio do paciente durante a primeira hora de permanência na unidade'
         },
         {
             'Número':64,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_pressao_arterial_sistolica_maxima',
+            'Descrição':'A pressão arterial sistólica mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':65,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_pressao_arterial_sistolica_minima',
+            'Descrição':'A pressão arterial sistólica mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':66,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_pressao_arterial_sistolica_nao_invasiva_maxima',
+            'Descrição':'A pressão arterial sistólica mais alta do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':67,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'h1_pressao_arterial_sistolica_nao_invasiva_minima',
+            'Descrição':'A pressão arterial sistólica mais baixa do paciente durante a primeira hora de permanência na unidade, medida de forma não invasiva'
         },
         {
             'Número':68,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'd1_gricose_maxima',
+            'Descrição':'A maior concentração de glicose do paciente em seu soro ou plasma durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':69,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'd1_gricose_minima',
+            'Descrição':'A menor concentração de glicose do paciente em seu soro ou plasma durante as primeiras 24 horas de internação'
         },
         {
             'Número':70,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'd1_potassio_maximo',
+            'Descrição':'A maior concentração de potássio para o paciente em seu soro ou plasma durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':71,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'd1_potassio_minimo',
+            'Descrição':'A menor concentração de potássio para o paciente em seu soro ou plasma durante as primeiras 24 horas de permanência na unidade'
         },
         {
             'Número':72,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'probabilidade_de_morte_no_hospital_(apache_4a)',
+            'Descrição':'A previsão probabilística APACHE IVa de mortalidade intra-hospitalar para o paciente que utiliza o escore APACHE III e outras covariáveis, incluindo o diagnóstico'
         },
         {
             'Número':73,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'probabilidade_morte_na_uti_(apache_4a)',
+            'Descrição':'A previsão probabilística APACHE IVa de mortalidade na UTI para o paciente que utiliza o escore APACHE III e outras covariáveis, incluindo diagnóstico'
         },
         {
             'Número':74,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'aids',
+            'Descrição':'Se o paciente tem um diagnóstico definitivo de síndrome da imunodeficiência adquirida (AIDS) (não somente HIV positivo)'
         },
         {
             'Número':75,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'cirrose',
+            'Descrição':'Se o paciente tem uma história de uso pesado de álcool com hipertensão portal e varizes, outras causas de cirrose com evidência de hipertensão portal e varizes ou cirrose comprovada por biópsia. Essa comorbidade não se aplica a pacientes com transplante hepático funcionante'
         },
         {
             'Número':76,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'diabetes_mellitus',
+            'Descrição':'Se o paciente foi diagnosticado com diabetes, juvenil ou adulto, que requer medicação'
         },
         {
             'Número':77,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'insuficiencia_hepatica',
+            'Descrição':'Se o paciente tem cirrose e complicações adicionais, incluindo icterícia e ascite, sangramento gastrointestinal superior, encefalopatia hepática ou coma'
         },
         {
             'Número':78,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'imunossupressao',
+            'Descrição':'Se o paciente teve seu sistema imunológico suprimido nos seis meses anteriores à admissão na UTI por qualquer um dos seguintes motivos: radioterapia, quimioterapia, uso de drogas imunossupressoras não citotóxicas, esteróides em altas doses (pelo menos 0,3 mg/kg/dia de metilprednisolona ou equivalente por pelo menos 6 meses)'
         },
         {
             'Número':79,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'leucemia',
+            'Descrição':'Se o paciente foi diagnosticado com leucemia mielóide aguda ou crônica, leucemia linfocítica aguda ou crônica ou mieloma múltiplo'
         },
         {
             'Número':80,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'linfoma',
+            'Descrição':'Se o paciente foi diagnosticado com linfoma não-Hodgkin'
         },
         {
             'Número':81,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'tumor_solido_com_metastase',
+            'Descrição':'Se o paciente foi diagnosticado com qualquer carcinoma de tumor sólido (incluindo melanoma maligno) que tenha evidência de metástase'
         },
         {
             'Número':82,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'sistema_corporal_apache_3j',
+            'Descrição':'Grupo de diagnóstico de admissão para APACHE III'
         },
         {
             'Número':83,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'sistema_corporal_apache_2',
+            'Descrição':'Grupo de diagnóstico de admissão para APACHE II'
         },
         {
             'Número':84,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'Unnamed: 83',
+            'Descrição':'Sem descrição'
         },
         {
             'Número':85,
-            'Coluna': '...',
-            'Descrição':'...'
+            'Coluna': 'morte_hospital',
+            'Descrição':'Se o paciente morreu durante esta hospitalização'
         }
     ]
 
