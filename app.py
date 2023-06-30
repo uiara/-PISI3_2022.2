@@ -15,12 +15,12 @@ def home():
     st.write('Introdução inicial dos dados')
     
     df = pd.read_parquet("data/dataset_renomeado.parquet")
-
-
+    ## Selecionar todas as colunas, exceto as colunas específicas
+    ctd = df.columns[df.columns != 'Unnamed: 83']
     #with st.expander("Visualização dos dados", expanded=True):
     #    st.dataframe(df.head())
     st.write('Vizualição dos dados')
-    st.dataframe(df.head())
+    st.dataframe(df[ctd].head(10))
     st.title('Dados Patient Survival Prediction')
     col1, col2, col3 = st.columns(3)# Calcular o total de pacientes
     
