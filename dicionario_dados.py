@@ -221,7 +221,7 @@ def dic():
         {
             'Número':44,
             'Coluna': 'd1_pressao_arterial_sistolica_maxima',
-            'Descrição':'...'
+            'Descrição':'A pressão arterial sistólica mais alta do paciente durante as primeiras 24 horas de permanência na unidade, medida de forma não invasiva ou invasiva'
         },
         {
             'Número':45,
