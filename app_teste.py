@@ -54,10 +54,33 @@ def home():
     fig_scatter = px.scatter(dados, x=coluna_x, y=coluna_y, color=coluna_cor)
     st.plotly_chart(fig_scatter)
 
+    from sklearn.cluster import KMeans
+
+
+   # Selecionar as colunas para a análise de agrupamento
+    colunas_analise = st.multiselect('Selecione as colunas para a análise de agrupamento', list(dados.columns))
+
+    if colunas_analise:
+        # Realizar a análise de agrupamento
+        dados_analise = dados[colunas_analise]
+
+        # Normalizar os dados (opcional, dependendo das características das variáveis)
+        # dados_analise = (dados_analise - dados_analise.mean()) / dados_analise.std()
+
+        # Aplicar o algoritmo de agrupamento K-means
+        modelo = KMeans(n_clusters=3)  # Defina o número de clusters desejado
+        modelo.fit(dados_analise)
+        dados['grupo'] = modelo.labels_
+
+        # Visualizar os grupos usando Plotly
+        fig = px.scatter_3d(dados, x=colunas_analise[0], y=colunas_analise[1], z=colunas_analise[2], color='grupo')
+        st.plotly_chart(fig)
+
+
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
-    #'Página 3 - Gráficos': gráficos
+    #'Página 3 - Gráficos': exibir_paginaX,
 }
 
 # Seletor de página na barra lateral

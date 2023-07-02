@@ -2,183 +2,63 @@ from dicionario_dados import dic
 
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
 
 st.set_page_config(layout="wide")
 
+def carregar_dados():
+    dados = pd.read_parquet('data/dataset_streamlit.parquet')
+    return dados
+
+
 def home():
-    st.title('Página 1 - Introdução')
     
-    st.write('Introdução inicial dos dados')
-    
-    df = pd.read_parquet("data/dataset_renomeado.parquet")
-    ## Selecionar todas as colunas, exceto as colunas específicas
-    ctd = df.columns[df.columns != 'Unnamed: 83']
-    #with st.expander("Visualização dos dados", expanded=True):
-    #    st.dataframe(df.head())
-    st.write('Vizualição dos dados')
-    st.dataframe(df[ctd].head(10))
-    st.title('Dados Patient Survival Prediction')
-    col1, col2, col3 = st.columns(3)# Calcular o total de pacientes
-    
-    total_pacientes = df.shape[0]
+    dados = carregar_dados()
 
-    # Calcular o número de pessoas que sobreviveram
-    sobreviventes = df['morte_hospital'].value_counts()[0]
+    st.header('Análise Exploratória de Dados')
 
-    # Calcular a porcentagem de sobreviventes em relação ao total de pacientes
-    porcentagem_sobreviventes = (sobreviventes / total_pacientes) * 100
-    
-    # Exibir o valor total de participantes
-    with col1:
-        st.markdown(
-            f"<div style='text-align: center; padding: 10px; width: 200px;'>"
-            f"<span style='font-size: 40px'>{total_pacientes}</span>"
-            f"<br>"
-            f"<span style='font-size: 20px'>Total pacientes</span>"
-            f"</div>",
-            unsafe_allow_html=True
-        )
+    # Variáveis quantitativas
+    st.subheader('Variáveis Quantitativas')
+    quantitativas = dados.select_dtypes(include=['int', 'float'])
+    st.dataframe(quantitativas.describe())
 
-    # Cálculo das porcentagens
-    count = df['genero'].value_counts()
-    percentages = count / len(df) * 100
+    # Variáveis qualitativas
+    st.subheader('Variáveis Qualitativas')
+    qualitativas = dados.select_dtypes(include=['object'])
+    st.dataframe(qualitativas.describe())
 
-    # Criação do Sunburst Plot
-    fig = go.Figure(go.Sunburst(
-        labels=['Total', 'Homem', 'Mulher'],
-        parents=['', 'Total', 'Total'],
-        values=[100, percentages['M'], percentages['F']],
-    ))
+    # Gráficos interativos
+    st.header('Gráficos Interativos')
 
-    # Configurações de layout
-    fig.update_layout(
-        height=300,
-        margin=dict(t=20, l=0, r=0, b=0),
-    )
+    # Gráfico de barras para variáveis qualitativas
+    st.subheader('Gráfico de Barras (Variáveis Qualitativas)')
+    coluna_qualitativa = st.selectbox('Selecione uma coluna qualitativa', qualitativas.columns)
+    contagem_qualitativa = dados[coluna_qualitativa].value_counts()
+    fig_bar_qualitativa = px.bar(x=contagem_qualitativa.index, y=contagem_qualitativa.values)
+    st.plotly_chart(fig_bar_qualitativa)
 
-    # Exibir o número de sobreviventes e a porcentagem
-    with col3:
+    # Gráfico de histograma para variáveis quantitativas
+    st.subheader('Histograma (Variáveis Quantitativas)')
+    coluna_quantitativa = st.selectbox('Selecione uma coluna quantitativa', quantitativas.columns)
+    fig_hist_quantitativa = px.histogram(dados, x=coluna_quantitativa, nbins=30)
+    st.plotly_chart(fig_hist_quantitativa)
 
-        # Definir as opções para a seleção
-        opcoes_coluna2 = ['Quantidade Total', 'Porcentagem']
+    # Gráfico de dispersão com marcação de cores para variáveis quantitativas e qualitativas
+    st.subheader('Gráfico de Dispersão (Quantitativas x Qualitativas)')
+    coluna_x = st.selectbox('Selecione uma coluna quantitativa para o eixo X', quantitativas.columns)
+    coluna_y = st.selectbox('Selecione uma coluna quantitativa para o eixo Y', quantitativas.columns)
+    coluna_cor = st.selectbox('Selecione uma coluna qualitativa para a cor', qualitativas.columns)
 
-        # Selecionar a opção escolhida
-        #opcao_selecionada = st.selectbox("Escolha a exibição na coluna 2:", opcoes_coluna2)
-        
-        st.markdown(
-            f"<div style='text-align: center; padding: 10px; width: 200px;'>"
-            f"<span style='font-size: 30px'>{porcentagem_sobreviventes:.2f}%</span>"
-            f"<br>"
-            f"<span style='font-size: 16px'>Porcentagem de Sobreviventes</span>"
-            f"</div>",
-            unsafe_allow_html=True
-        )
-
-        # Cálculo das porcentagens
-        count = df['genero'].value_counts()
-        percentagens = count / len(df) * 100
-
-        # Criação do Sunburst Plot
-        fig = go.Figure(go.Sunburst(
-            labels=['Total', 'Homem', 'Mulher'],
-            parents=['', 'Total', 'Total'],
-            values=[100, percentagens['M'], percentagens['F']],
-        ))
-
-        # Configurações de layout
-        fig.update_layout(
-            height=300,
-            margin=dict(t=20, l=0, r=0, b=0),
-        )
-
-    # Exibição do Sunburst Plot no Streamlit
-    with col2:
-        st.plotly_chart(fig, use_container_width=True)
-    
-    genero_proporcao = df['genero'].value_counts(normalize=True)*100
-    fig = plt.figure(figsize=(8, 6))
-    genero_proporcao.plot(kind='pie')
-    plt.xlabel('Gênero')
-    plt.ylabel('Contagem')
-    plt.title('Proporção por Gêneros')
-    st.pyplot(fig)
-
-    
-    df['tipo_estadia_uti'] = df['tipo_estadia_uti'].replace({'admit':'Admitido', 'readmit':'Readmitido', 'transfer':'Transferido'})
-    tipo_de_estadia_count = df['tipo_estadia_uti'].value_counts()
-    fig = plt.figure(figsize = (6, 4))
-    tipo_de_estadia_count.plot(kind='pie')
-    plt.title("Tipos de Estadia UTI")
-    plt.xlabel("Estadia")
-    #plt.ylabel("Contagem")
-    st.pyplot(fig)
-
-    etinia_count = df['etnia'].value_counts()
-    fig = plt.figure(figsize = (6, 4))
-    df["etnia"].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
-    plt.title("Distribuição de Etnias")
-    plt.xlabel("Etnia")
-    plt.ylabel("Contagem")
-    st.pyplot(fig)
-    fonte_admissao_uti_count = df['fonte_admissao_uti'].value_counts()
-    fig = plt.figure(figsize = (8, 6))
-    df['fonte_admissao_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
-    plt.title("Tipos de Admissão na UTI")
-    plt.xlabel("Admissão")
-    plt.ylabel("Contagem")
-    st.pyplot(fig)
-
-    tipo_de_estadia_count = df['tipo_estadia_uti'].value_counts()
-    df['tipo_estadia_uti'].replace({'admit':'Admitido', 'readmit':'Readmitido', 'transfer':'Transferido'})
-    fig = plt.figure(figsize = (8, 6))
-    df['tipo_estadia_uti'].hist(bins = 40, ec = "k", alpha = .6, color = "royalblue")
-    plt.title("Tipos de Estadia UTI")
-    plt.xlabel("Estadia")
-    plt.ylabel("Contagem")
-    st.pyplot(fig)
-    
-    doencas = st.selectbox("Selecione a doença", options = ('aids','cirrose', 'diabetes_mellitus', 'insuficiencia_hepatica',
-                                                              'imunossupressao','leucemia',
-                                                              'linfoma','tumor_solido_com_metastase')
-    )
-
-    doencas_counts = df[df[doencas] == 1].groupby('idade').size().reset_index(name='total_pessoas_com_{doencas}')
-
-    fig= px.scatter(doencas_counts, x = 'idade', y='total_pessoas_com_{doencas}')
-
-    fig.update_layout(
-        title = f'IMC de pessoas com {doencas}',
-        xaxis_title = 'IMC',
-        yaxis_title = f'Total de Pessoas com {doencas}',
-    )
-    st.plotly_chart(fig)
-
-    doencas_counts = df[df[doencas] == 1].groupby('imc').size().reset_index(name = f'total_pessoas_com_{doencas}')
-
-    fig= px.scatter(doencas_counts, x = 'imc', y = f'total_pessoas_com_{doencas}')
-
-    fig.update_layout(
-        title = f'IMC de pessoas com {doencas}',
-        xaxis_title = 'IMC',
-        yaxis_title = f'Total de Pessoas com {doencas}',
-    )
+    fig_scatter = px.scatter(dados, x=coluna_x, y=coluna_y, color=coluna_cor)
+    st.plotly_chart(fig_scatter)
 
 
-    st.plotly_chart(fig)
-# Seletor de página
+
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
-    #'Página 3 - Gráficos': gráficos
+    
 }
-
-
-# Título
-st.title('Patient Survival Prediction')
 
 # Seletor de página na barra lateral
 page = st.sidebar.selectbox('Selecione a página', tuple(pages.keys()))
