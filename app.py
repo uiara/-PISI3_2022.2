@@ -1,4 +1,8 @@
 from dicionario_dados import dic
+from ante_hospital import passado
+from inter_hospital import inter
+from primeira_hora import primeira
+from primeiras_vinte_quatro import vinte_quatro
 
 import streamlit as st
 import pandas as pd
@@ -57,7 +61,10 @@ def home():
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
-    
+    'Página 3 - Anterior ao Internamento' : passado,
+    'Página 4 - Durante o Internamento' : inter,
+    'Página 5 - Primeira Hora de Internamento' : primeira,
+    'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
 }
 
 # Seletor de página na barra lateral
