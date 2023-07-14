@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 #divisão dos dados que serão usados e dados de resultado
 def create_model(data):
     X = data.drop(['hospital_death'], axis = 1)
-    Y = data['diagnosis']
+    Y = data['hospital_death']
 
 #escalonamento basico
     scaler = StandardScaler()
@@ -19,18 +19,22 @@ def create_model(data):
     model = LogisticRegression()
     model.fit(X_train, Y_train)
 
-    #testar_modelo
+    #testar_modelo (regressão logística)
     Y_pred = model.predict(X_test)
+    
     print('Precisão do modelo: ', accuracy_score(Y_test, Y_pred))
-    print("Classificação: \n", classification_report(Y_test, Y_pred))
+    
+    print("relatorio de classificação: \n", classification_report(Y_test, Y_pred))
     return model, scaler
 
 
-
+#faxina
 def get_clean_data():
     data = pd.read_csv("data/dataset.csv")
 #remover colunas irrelevantes
-    data = data.drop(['encounter_id','patient_id','hospital_id'], axis=1)
+    data = data.drop(['encounter_id','patient_id','hospital_id','ethnicity', 'gender', 'icu_admit_source','icu_stay_type','icu_type','apache_3j_bodysystem','apache_2_bodysystem','Unnamed: 83'], axis=1)
+    data = data.dropna(axis=0)
+    
 
 
     return data
