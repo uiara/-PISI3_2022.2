@@ -1,86 +1,97 @@
 import streamlit as st
-import plotly.graph_objects as go
 import pandas as pd
+import plotly.express as px
 
-# Ler o dataframe do arquivo Parquet
+#def carregar_dados():
 df = pd.read_parquet('data/dataset_streamlit.parquet')
+    #return dados
 
-# Colunas referentes à primeira hora
-primeira_hora_colunas = [
-    'h1_pressão_arterial_diastolica_maxima',
+#def pagina():
+#df = carregar_dados()
+
+colunas_anterior_internamento = ['idade', 'imc', 'cirurgia_eletiva', 'etnia', 'genero', 'altura', 'aids', 'cirrose', 'diabetes_mellitus',
+                        'insuficiencia_hepatica', 'imunossupressao', 'leucemia', 'linfoma', 'tumor_solido_com_metastase', 'morte_hospital']
+
+colunas_durante_internamento = ['fonte_admissao_uti', 'tipo_estadia_uti', 'tipo_uti',
+    'dias_de_permanencia_pre_uti', 'peso', 'diagnostico_pache_2',
+    'diagnostico_apache_3j', 'apache_pos_operatorio', 'arf_apache',
+    'gcs_olhos_apache', 'gcs_motor_apache', 'gcs_incapaz_apache',
+    'gcs_verbal_pache', 'frequencia_cardiaca_apache', 'intubado_apache',
+    'map_apache', 'frequencia_respiratoria_pache', 'temperatura_apache',
+    'ventilado_apache','sistema_corporal_apache_3j','sistema_corporal_apache_2', 'morte_hospital']
+
+colunas_primeira_hora = ['h1_pressão_arterial_diastolica_maxima',
     'h1_ressao_arterial_iastolica_minima',
     'h1_pressao_arterial_diastolica_nao_invasiva_maxima',
     'h1_pressao_arterial_diastolica_nao_invasiva_minima',
-    'h1_frequencia_cardiaca_maxima',
-    'h1_frequencia_cardiaca_minima',
-    'h1_pressao_arterial_media_maxima',
-    'h1_pressao_arterial_media_minima',
+    'h1_frequencia_cardiaca_maxima', 'h1_requencia_cardiaca_minima',
+    'h1_pressao_arterial_media_maxima', 'h1_pressao_arterial_media_minima',
     'h1_pressao_arterial_media_nao_invasiva_maxima',
     'h1_pressao_arterial_media_nao_invasiva_minima',
     'h1_frequencia_respiratoria_maxima',
-    'h1_frequencia_respiratoria_minima',
-    'h1_spO2_maximo',
-    'h1_spO2_minimo',
+    'h1_frequencia_respiratoria_minima', 'h1_spO2_maximo', 'h1_spO2_minimo',
     'h1_pressao_arterial_sistolica_maxima',
     'h1_pressao_arterial_sistolica_minima',
     'h1_pressao_arterial_sistolica_nao_invasiva_maxima',
-    'h1_pressao_arterial_sistolica_nao_invasiva_minima'
-]
+    'h1_pressão_arterial_sistolica_nao_invasiva_minima', 'morte_hospital']
 
-# Colunas referentes às primeiras 24 horas
-primeiras_24_horas_colunas = [
-    'd1_pressao_arterial_diastolica_maxima',
+
+colunas_primeiras_vinte_quatro = ['d1_pressao_arterial_diastolica_maxima',
     'd1_pressao_arterial_diastolica_minima',
     'd1_pressao_arterial_diastolica_nao_invasiva_maxima',
     'd1_pressao_arterial_diastólica_nao_invasiva_minima',
-    'd1_frequencia_cardiaca_maxima',
-    'd1_frequencia_cardiaca_minima',
-    'd1_pressao_arterial_media_maxima',
-    'd1_pressao_arterial_media_minima',
+    'd1_frequencia_cardiaca_maxima', 'd1_frequencia_cardiaca_minima',
+    'd1_pressao_arterial_media_maxima', 'd1_pressao_arterial_media_minima',
     'd1_pressao_arterial_media_nao_invasiva_maxima',
     'd1_pressao_arterial_media_nao_invasiva_minima',
     'd1_frequencia_respiratoria_maxima',
-    'd1_frequencia_respiratoria_minima',
-    'd1_spO2_maximo',
-    'd1_spO2_minimo',
+    'd1_frequencia_respiratoria_minima', 'd1_spO2_maximo', 'd1_spO2_minimo',
     'd1_pressao_arterial_sistolica_maxima',
     'd1_pressao_arterial_sistolica_minima',
     'd1_pressao_arterial_sistolica_nao_invasiva_maxima',
     'd1_pressao_arterial_sistolica_nao_invasiva_minima',
-    'd1_temperatura_maxima',
-    'd1_temperatura_minima',
-    'd1_glicose_maxima',
-    'd1_glicose_minima',
-    'd1_potassio_maximo',
-    'd1_potassio_minimo'
-]
+    'd1_temperatura_maxima', 'd1_temperatura_minima','d1_glicose_maxima', 
+    'd1_glicose_minima', 'd1_potassio_maximo',
+    'd1_potassio_minimo', 'morte_hospital']
 
-# Seleção para a primeira hora
-st.sidebar.markdown("## Primeira Hora")
-primeira_hora_opcao_selecionada = st.sidebar.selectbox("Selecione a opção para análise:", primeira_hora_colunas)
+# Configurar o aplicativo Streamlit
+st.title('Gráfico de Correlação')
+st.write('Selecione duas listas para visualizar a correlação entre elas.')
 
-# Seleção para as primeiras 24 horas
-st.sidebar.markdown("## Primeiras 24 Horas")
-primeiras_24_horas_opcao_selecionada = st.sidebar.selectbox("Selecione a opção para análise:", primeiras_24_horas_colunas)
+# Exibir opções para selecionar as listas
+selected_lista1 = st.selectbox('Selecione a primeira lista:', (colunas_anterior_internamento, colunas_durante_internamento, colunas_primeira_hora, colunas_primeiras_vinte_quatro))
+selected_lista2 = st.selectbox('Selecione a segunda lista:', (colunas_anterior_internamento, colunas_durante_internamento, colunas_primeira_hora, colunas_primeiras_vinte_quatro))
 
-# Filtrar o dataframe mantendo apenas as colunas selecionadas para a primeira hora
-df_primeira_hora = df[[primeira_hora_opcao_selecionada]]
+# Verificar se duas listas foram selecionadas
+if selected_lista1 != selected_lista2:
+    # Concatenar as duas listas selecionadas
+    selected_columns = selected_lista1 + selected_lista2
 
-# Filtrar o dataframe mantendo apenas as colunas selecionadas para as primeiras 24 horas
-df_primeiras_24_horas = df[[primeiras_24_horas_opcao_selecionada]]
+    # Carregar o dataset com as colunas selecionadas
+    #df = pd.read_csv('seu_dataset.csv', usecols=selected_columns)
 
-# Criar figura e adicionar os dados selecionados
-fig = go.Figure()
-fig.add_trace(go.Bar(x=['Primeira Hora'], y=[df_primeira_hora.iloc[0, 0]], name=primeira_hora_opcao_selecionada))
-fig.add_trace(go.Bar(x=['Primeiras 24 Horas'], y=[df_primeiras_24_horas.iloc[0, 0]], name=primeiras_24_horas_opcao_selecionada))
+    # Gerar o gráfico de correlação usando a biblioteca Plotly
+    corr_df = df.corr()
+    fig = px.imshow(corr_df)
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.write('Por favor, selecione duas listas diferentes.')
 
-# Personalizar o layout do gráfico
-fig.update_layout(
-    title='Análise do Resultado',
-    xaxis_title='Período',
-    yaxis_title='Resultado',
-    barmode='stack'
-)
 
-# Exibir o gráfico no Streamlit
-st.plotly_chart(fig)
+
+# Configurar o aplicativo Streamlit
+st.title('Gráfico de Correlação')
+st.write('Selecione 2 conjuntos de colunas para visualizar a correlação.')
+
+# Exibir opções para selecionar os conjuntos de colunas
+selected_columns = st.multiselect('Selecione os conjuntos de colunas:', df.columns)
+
+# Verificar se exatamente 2 conjuntos de colunas foram selecionados
+if len(selected_columns) == 2:
+    # Gerar o gráfico de correlação usando a biblioteca Plotly
+    corr_df = df[selected_columns].corr()
+    fig = px.imshow(corr_df)
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.write('Por favor, selecione exatamente 2 conjuntos de colunas.')
+

@@ -1,14 +1,14 @@
-from dicionario_dados import dic
-from ante_hospital import passado
-from inter_hospital import inter
-from primeira_hora import primeira
-from primeiras_vinte_quatro import vinte_quatro
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 
 st.set_page_config(layout="wide")
+
+
+
+from dicionario_dados import dic
+
+
 
 def carregar_dados():
     dados = pd.read_parquet('data/dataset_streamlit.parquet')
@@ -56,19 +56,20 @@ def home():
     fig_scatter = px.scatter(dados, x=coluna_x, y=coluna_y, color=coluna_cor)
     st.plotly_chart(fig_scatter)
 
-
+from ante_hospital import pagina
 
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
-    'Página 3 - Anterior ao Internamento' : passado,
-    'Página 4 - Durante o Internamento' : inter,
-    'Página 5 - Primeira Hora de Internamento' : primeira,
-    'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
+    'Página 3 - Anterior ao Internamento' : pagina,
+    #'Página 4 - Durante o Internamento' : inter,
+    #'Página 5 - Primeira Hora de Internamento' : primeira,
+    #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
 }
 
 # Seletor de página na barra lateral
 page = st.sidebar.selectbox('Selecione a página', tuple(pages.keys()))
 
-# Renderiza a página selecionada
+
+
 pages[page]()
