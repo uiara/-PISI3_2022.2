@@ -1,12 +1,11 @@
+from dicionario_dados import dic
+from ante_hospital import pagina
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 
 st.set_page_config(layout="wide")
-
-
-
-from dicionario_dados import dic
 
 
 
@@ -56,7 +55,6 @@ def home():
     fig_scatter = px.scatter(dados, x=coluna_x, y=coluna_y, color=coluna_cor)
     st.plotly_chart(fig_scatter)
 
-from ante_hospital import pagina
 
 pages = {
     'Página 1 - Introdução': home,
@@ -67,7 +65,6 @@ pages = {
     #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
 }
 
-# Seletor de página na barra lateral
 page = st.sidebar.selectbox('Selecione a página', tuple(pages.keys()))
 
 
