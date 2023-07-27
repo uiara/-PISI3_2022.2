@@ -137,4 +137,4 @@ def pagina():
     st.plotly_chart(fig)
 
 
-pagina()
+#pagina()
