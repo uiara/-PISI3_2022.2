@@ -68,7 +68,7 @@ def home():
         # dados_analise = (dados_analise - dados_analise.mean()) / dados_analise.std()
 
         # Aplicar o algoritmo de agrupamento K-means
-        modelo = KMeans(n_clusters=3)  # Defina o número de clusters desejado
+        modelo = KMeans(n_clusters=4)  # Defina o número de clusters desejado
         modelo.fit(dados_analise)
         dados['grupo'] = modelo.labels_
 
