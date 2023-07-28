@@ -1,3 +1,5 @@
+#Algorítmo de regressão logística usando o sklearn
+
 import pandas as pd
 import pickle as pickle
 from sklearn.preprocessing import StandardScaler
