@@ -7,10 +7,8 @@ st.title("App de Teste - Visualização de Dados (usando o dataset.csv)")
 st.sidebar.subheader("Opções")
 
 def get_clean_data():
-    data = pd.read_csv("data/dataset.csv")
+    data = pd.read_csv("data/dataset_onehot_filling_renomeadas.csv")
     # Remover colunas irrelevantes
-    data = data.drop(['encounter_id', 'patient_id', 'hospital_id', 'apache_2_bodysystem', 'Unnamed: 83'], axis=1)
-    data = data.dropna(axis=0)
     return data
 
 clean_data = get_clean_data()
@@ -23,14 +21,14 @@ sampled_data = clean_data.sample(frac=sampling_fraction, random_state=42)
 filter_option = st.sidebar.radio("Filtrar por", ("Mostrar Todos", "Mortes", "Sobrevivências"))
 
 if filter_option == "Mortes":
-    filtered_data = sampled_data[sampled_data["hospital_death"] == 1]
+    filtered_data = sampled_data[sampled_data["morte_hospital"] == 1]
 elif filter_option == "Sobrevivências":
-    filtered_data = sampled_data[sampled_data["hospital_death"] == 0]
+    filtered_data = sampled_data[sampled_data["morte_hospital"] == 0]
 else:
     filtered_data = sampled_data
 
 # Exibir a contagem de mortes e sobrevivências
-num_deaths = filtered_data["hospital_death"].sum()
+num_deaths = filtered_data["morte_hospital"].sum()
 num_survivals = len(filtered_data) - num_deaths
 st.write(f"Número de Mortes: {num_deaths}")
 st.write(f"Número de Sobrevivências: {num_survivals}")
@@ -50,7 +48,7 @@ if chart_select == "Dispersão":
     y_values = st.sidebar.selectbox('Eixo Y', options=colunas_numericas)
 
     color_discrete_map = {0: custom_palette[0], 1: custom_palette[1]}
-    plot = px.scatter(data_frame=filtered_data, x=x_values, y=y_values, color="hospital_death", color_discrete_map=color_discrete_map)
+    plot = px.scatter(data_frame=filtered_data, x=x_values, y=y_values, color="morte_hospital", color_discrete_map=color_discrete_map)
     st.plotly_chart(plot)
 
 elif chart_select == "Histograma":
@@ -69,5 +67,5 @@ elif chart_select == "Boxplot":
 elif chart_select == "Gráfico de Barras":
     st.sidebar.subheader("Configurar Gráfico de Barras")
     x_values = st.sidebar.selectbox('Selecione a coluna para o Gráfico de Barras', options=list(filtered_data.select_dtypes(include=['object']).columns))
-    plot = px.bar(data_frame=filtered_data, x=x_values, color="hospital_death")
+    plot = px.bar(data_frame=filtered_data, x=x_values, color="morte_hospital")
     st.plotly_chart(plot)
