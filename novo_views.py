@@ -17,17 +17,25 @@ clean_data = get_clean_data()
 sampling_fraction = st.slider("Selecione a Fração de Amostragem de Dados", min_value=0.05, max_value=1.0, value=0.5, step=0.01)
 sampled_data = clean_data.sample(frac=sampling_fraction, random_state=42)
 
-# Adicionar um botão de rádio para filtrar mortes ou sobrevivências
-filter_option = st.sidebar.radio("Filtrar por", ("Mostrar Todos", "Mortes", "Sobrevivências"))
+# Adicionar um botão de rádio para filtrar mortes, sobrevivências, cirurgia eletiva, foi intubado ou não foi intubado
+filter_option = st.sidebar.radio("Filtrar por", ("Mostrar Todos", "Mortes", "Sobrevivências", "Cirurgia Eletiva", "Não Cirurgia Eletiva", "Foi Intubado", "Não Foi Intubado"))
 
 if filter_option == "Mortes":
     filtered_data = sampled_data[sampled_data["morte_hospital"] == 1]
 elif filter_option == "Sobrevivências":
     filtered_data = sampled_data[sampled_data["morte_hospital"] == 0]
+elif filter_option == "Cirurgia Eletiva":
+    filtered_data = sampled_data[sampled_data["cirurgia_eletiva"] == 1]
+elif filter_option == "Não Cirurgia Eletiva":
+    filtered_data = sampled_data[sampled_data["cirurgia_eletiva"] == 0]
+elif filter_option == "Foi Intubado":
+    filtered_data = sampled_data[sampled_data["intubado_apache"] == 1]
+elif filter_option == "Não Foi Intubado":
+    filtered_data = sampled_data[sampled_data["intubado_apache"] == 0]
 else:
     filtered_data = sampled_data
 
-# Exibir a contagem de mortes e sobrevivências
+# Exibir a contagem de mortes, sobrevivências, cirurgia eletiva, foi intubado e não foi intubado
 num_deaths = filtered_data["morte_hospital"].sum()
 num_survivals = len(filtered_data) - num_deaths
 st.write(f"Número de Mortes: {num_deaths}")
@@ -35,7 +43,7 @@ st.write(f"Número de Sobrevivências: {num_survivals}")
 
 chart_select = st.sidebar.selectbox(
     label="Selecione o tipo de gráfico",
-    options=["Dispersão", "Histograma", 'Boxplot', "Gráfico de Barras"]
+    options=["Dispersão", "Histograma", "Boxplot", "Gráfico de Barras"]
 )
 
 colunas_numericas = list(sampled_data.select_dtypes(['float', 'int']).columns)
