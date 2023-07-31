@@ -59,7 +59,7 @@ def home():
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
-    'Página 3 - Anterior ao Internamento' : pagina,
+    'Página 3 - Correlação/grafico de correlação' : pagina,
     #'Página 4 - Durante o Internamento' : inter,
     #'Página 5 - Primeira Hora de Internamento' : primeira,
     #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,

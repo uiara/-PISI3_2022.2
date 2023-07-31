@@ -9,7 +9,7 @@ df = pd.read_parquet('data/dataset_renomeado.parquet')
 colunas_deletar = ['id_ncontro', 'id_paciente', 'id_hospital','id_uti']
 df = df.drop(columns=colunas_deletar)
 
-df = df[['ventilado_apache', 'd1_frequencia_cardiaca_maxima', 'h1_frequencia_respiratoria_maxima', 'morte_hospital']]
+df = df[['ventilado_apache','probabilidade_morte_na_uti_(apache_4a)', 'd1_frequencia_cardiaca_maxima','d1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima','d1_spO2_minimo','d1_temperatura_minima', 'morte_hospital']]
 df = df.dropna()
 
 y = df['morte_hospital']
@@ -21,7 +21,7 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-knn_classifier = KNeighborsClassifier(n_neighbors=5)  
+knn_classifier = KNeighborsClassifier(n_neighbors=21)  
 
 knn_classifier.fit(X_train_scaled, y_train)
 
