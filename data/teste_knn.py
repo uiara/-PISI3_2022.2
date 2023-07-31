@@ -28,7 +28,7 @@ knn_classifier.fit(X_train_scaled, y_train)
 
 y_pred = knn_classifier.predict(X_test_scaled)
 
-
+# Avaliar o desempenho do modelo
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Acurácia do modelo: {accuracy:.2f}")
 
