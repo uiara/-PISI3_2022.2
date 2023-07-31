@@ -33,3 +33,7 @@ plt.xlabel('Number of Clusters')
 plt.ylabel('SSE (Sum of Squared Errors)')
 plt.title('Elbow Method to Determine the Number of Clusters')
 plt.show()
+
+#O número ideal de clusters é geralmente escolhido no ponto em que a curva começa a nivelar
+#formando um "cotovelo". Esse ponto indica que adicionar mais clusters não levará a uma redução significativa na SSE
+#sugerindo que o número de clusters encontrado nesse ponto é uma escolha razoável.
