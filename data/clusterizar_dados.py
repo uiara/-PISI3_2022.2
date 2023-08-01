@@ -8,7 +8,7 @@ def clusterizar_dados(data, n_clusters):
     return data
 
 
-df = pd.read_parquet('data/dataset_renomeado.parquet')
+df = pd.read_parquet('dataset_renomeado.parquet')
 
 colunas_deletar = ['id_ncontro', 'id_paciente', 'id_hospital','id_uti']
 df = df.drop(columns=colunas_deletar)
