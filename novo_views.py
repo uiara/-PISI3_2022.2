@@ -16,8 +16,6 @@ clean_data = get_clean_data()
 # Adicionar amostragem de dados
 sampling_fraction = st.slider("Selecione a Fração de Amostragem de Dados", min_value=0.05, max_value=1.0, value=0.5, step=0.01)
 sampled_data = clean_data.sample(frac=sampling_fraction, random_state=42)
-
-# Adicionar um botão de rádio para filtrar mortes, sobrevivências, cirurgia eletiva, foi intubado ou não foi intubado
 filter_option = st.sidebar.radio("Filtrar por", ("Mostrar Todos", "Mortes", "Sobrevivências", "Cirurgia Eletiva", "Não Cirurgia Eletiva", "Foi Intubado", "Não Foi Intubado"))
 
 if filter_option == "Mostrar Todos":
@@ -72,27 +70,3 @@ elif chart_select == "Boxplot":
     plot = px.box(data_frame=filtered_data, x=x_values, y=y_values, color_discrete_sequence=custom_palette)
     st.plotly_chart(plot)
 
-elif chart_select == "Heatmap":
-    st.subheader("Configurar Heatmap")
-
-    # Calcular a matriz de correlação apenas para as colunas numéricas do dataset filtrado
-    matriz_correlacao = filtered_data[colunas_numericas].corr()
-
-    # Encontrar as colunas com maiores correlações
-    num_colunas_maior_correlacao = 110
-    colunas_maior_correlacao = matriz_correlacao.abs().nlargest(num_colunas_maior_correlacao, "cirurgia_eletiva").index
-    st.write("Colunas com Maior Correlação:")
-    st.write(colunas_maior_correlacao)
-
-    # Visualizar o heatmap de correlação com as colunas selecionadas
-    heatmap_data = filtered_data[colunas_maior_correlacao]
-    st.write(heatmap_data.corr().style.background_gradient(cmap='coolwarm'))
-
-    high_correlations = matriz_correlacao.abs().unstack().sort_values(ascending=False).reset_index()
-    high_correlations = high_correlations[high_correlations['level_0'] != high_correlations['level_1']]  # Remover correlações da mesma coluna
-    high_correlations = high_correlations[(high_correlations[0] > 0.4) & (high_correlations[0] < 1.0)]
-
-    # Exibir as correlações
-    st.write("Correlações com valor maior que 0.4 e menor que 1.0:")
-    for index, row in high_correlations.iterrows():
-        st.write(f"{row['level_0']} - {row['level_1']}: {row[0]}")
