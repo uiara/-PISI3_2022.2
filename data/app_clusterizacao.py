@@ -5,7 +5,7 @@ import seaborn as sns
 from clusterizar_dados import clusterizar_dados
 
 # Carregando o dataset 
-df = pd.read_parquet('data/dataset_renomeado.parquet')
+df = pd.read_parquet('dataset_renomeado.parquet')
 
 colunas_deletar = ['id_ncontro', 'id_paciente', 'id_hospital','id_uti']
 df = df.drop(columns=colunas_deletar)
