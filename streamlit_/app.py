@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 
 def carregar_dados():
-    dados = pd.read_parquet('data/dataset_streamlit.parquet')
+    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
     return dados
 
 
