@@ -1,9 +1,10 @@
-
 from sklearn.cluster import KMeans
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
+
 from clusterizar_dados import clusterizar_dados
 
 # Carregando o dataset 
@@ -47,44 +48,23 @@ else:
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     data_selected['cluster'] = kmeans.fit_predict(data_selected)
 
-    # Cores para os clusters
-    colors = ['red', 'green', 'blue', 'orange', 'purple']
+     # Gráfico de dispersão 2D usando Plotly Express
+    fig_2d = px.scatter(data_selected, x=data_selected.columns[0], y=data_selected.columns[1],
+                        color=data_selected['cluster'].astype(str), title=f'Clusterização com K-means (2D)',
+                        labels={'cluster': 'Cluster'}, color_discrete_sequence=px.colors.qualitative.Plotly)
+    st.plotly_chart(fig_2d)
 
-    # Criar o gráfico de dispersão
-    plt.figure(figsize=(10, 6))
-    for i in range(n_clusters):
-        cluster_data = data_selected[data_selected['cluster'] == i]
-        plt.scatter(cluster_data.iloc[:, 0], cluster_data.iloc[:, 1], s=50, color=colors[i], label=f'Cluster {i + 1}')
+    # Gráfico de dispersão 3D usando Plotly Express
+    if len(selected_columns) >= 3:
+        fig_3d = px.scatter_3d(data_selected, x=data_selected.columns[0], y=data_selected.columns[1],
+                               z=data_selected.columns[2], color=data_selected['cluster'].astype(str),
+                               title=f'Clusterização com K-means (3D)', labels={'cluster': 'Cluster'},
+                               color_discrete_sequence=px.colors.qualitative.Plotly)
+        st.plotly_chart(fig_3d)
 
-    # Exibir os centróides dos clusters em um marcador especial
-    centroids = kmeans.cluster_centers_[:, :2]
-    plt.scatter(centroids[:, 0], centroids[:, 1], s=200, color='black', marker='X', label='Centroids')
-
-    # Personalizar o gráfico
-    plt.xlabel(selected_columns[0])
-    plt.ylabel(selected_columns[1])
-    plt.title(f'Clusterização com K-means (n_clusters={n_clusters})')
-    plt.legend()
-    plt.grid(True)
-
-    # Exibir o gráfico usando Streamlit
-    st.pyplot(plt)
     
     # Contador de clusters
     cluster_count = pd.Series(kmeans.labels_).value_counts().sort_index()
     st.subheader("Contador de Clusters")
     st.table(pd.DataFrame({'Cluster': cluster_count.index + 1, 'Quantidade': cluster_count.values}))
     
-
-# Plotando gráficos
-#st.subheader('Gráficos dos Clusters')
-#plt.figure(figsize=(8, 6))
-#sns.scatterplot(data=clusterized_data, x='morte_hospital', y='d1_temperatura_minima', hue='cluster', palette='Set1')
-#plt.title('Clusters de acordo com morte_hospital e d1_temperatura_minima')
-#st.pyplot(plt)
-
-#plt.figure(figsize=(8, 6))
-#sns.scatterplot(data=clusterized_data, x='morte_hospital', y='d1_spO2_minimo', hue='cluster', palette='Set1')
-#plt.title('Clusters de acordo com morte_hospital e d1_spO2_minimo')
-#st.pyplot(plt)
-
