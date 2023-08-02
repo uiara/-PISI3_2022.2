@@ -1,5 +1,5 @@
 from dicionario_dados import dic
-from ante_hospital import pagina
+from corr import pagina
 
 import streamlit as st
 import pandas as pd

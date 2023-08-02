@@ -1,4 +1,4 @@
-from dicionario_dados import dic
+from streamlit_.dicionario_dados import dic
 
 import streamlit as st
 import pandas as pd
