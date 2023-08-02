@@ -1,3 +1,4 @@
+
 from sklearn.cluster import KMeans
 import streamlit as st
 import pandas as pd
@@ -86,3 +87,4 @@ else:
 #sns.scatterplot(data=clusterized_data, x='morte_hospital', y='d1_spO2_minimo', hue='cluster', palette='Set1')
 #plt.title('Clusters de acordo com morte_hospital e d1_spO2_minimo')
 #st.pyplot(plt)
+
