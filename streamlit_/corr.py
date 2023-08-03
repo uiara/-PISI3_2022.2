@@ -109,7 +109,7 @@ def pagina():
 
     #with col2:
     st.header("Durante o Internamento")
-    st.info("Nesse conjunto, estão as colunas que representam os dados coletados durante o período de internação do paciente.")
+    st.text("Nesse conjunto, estão as colunas que representam os dados coletados durante o período de internação do paciente.")
 
     correlation_matrix = df[colunas_durante_internamento].corr()
     fig = go.Figure(data=go.Heatmap(
@@ -127,7 +127,7 @@ def pagina():
 
     #with col3:
     st.header("Primeira Hora de Internamento")
-    st.info("Aqui estão as colunas que contêm os dados específicos coletados durante a primeira hora do paciente internado.")
+    st.text("Aqui estão as colunas que contêm os dados específicos coletados durante a primeira hora do paciente internado.")
 
     correlation_matrix = df[colunas_primeira_hora].corr()
     fig = go.Figure(data=go.Heatmap(
@@ -145,7 +145,7 @@ def pagina():
 
     #with col4:
     st.header("Primeiras Vinte e Quatro Horas de Internamento")
-    st.info("Este conjunto de colunas engloba os dados coletados durante as primeiras vinte e quatro horas de internação do paciente.")
+    st.text("Este conjunto de colunas engloba os dados coletados durante as primeiras vinte e quatro horas de internação do paciente.")
 
     correlation_matrix = df[colunas_primeiras_vinte_quatro].corr()
     fig = go.Figure(data=go.Heatmap(

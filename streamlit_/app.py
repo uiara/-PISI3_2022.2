@@ -3,6 +3,7 @@ from corr import pagina
 from corr import pagina
 from app_clusterizacao import cluster
 from analise_grupos import grupos
+from st_knn import knn
 
 import streamlit as st
 import pandas as pd
@@ -79,7 +80,7 @@ pages = {
     'Página 2 - Dicionário': dic,
     'Página 3 - Correlação/grafico de correlação' : pagina,
     'Página 4 - Clusterização' : cluster,
-    #'Página 5 - Primeira Hora de Internamento' : primeira,
+    'Página 6 - KNN' : knn,
     #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
 }
 
