@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 def load_data():
-    return pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_renomeado.parquet')
+    return pd.read_parquet('C:/Users/A/Documents/PISI3_2022.2/data/dataset_renomeado.parquet')
 
 def preprocess_data(df):
     df = df[['ventilado_apache','probabilidade_morte_na_uti_(apache_4a)', 'd1_frequencia_cardiaca_maxima',

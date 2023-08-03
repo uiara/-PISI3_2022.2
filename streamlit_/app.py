@@ -1,6 +1,5 @@
 from dicionario_dados import dic
 from corr import pagina
-from corr import pagina
 from app_clusterizacao import cluster
 from analise_grupos import grupos
 from st_knn import knn
@@ -16,7 +15,7 @@ st.set_page_config(layout="wide")
 
 
 def carregar_dados():
-    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
+    dados = pd.read_parquet('C:/Users/A/Documents/PISI3_2022.2/data/dataset_streamlit.parquet')
     return dados
 
 
@@ -79,7 +78,8 @@ pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
     'Página 3 - Correlação/grafico de correlação' : pagina,
-    'Página 4 - Clusterização' : cluster,
+    'Página 4 - Análise em Conjuntos' : grupos,
+    'Página 5 - Clusterização' : cluster,
     'Página 6 - KNN' : knn,
     #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
 }
