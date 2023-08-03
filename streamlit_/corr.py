@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
+
 
 
 
@@ -81,15 +83,13 @@ def pagina():
        'probabilidade_morte_na_uti_(apache_4a)',
        'morte_hospital']
 
-    st.title("Análise em Conjuntos")
+    st.title("Análise em Correlação")
 
     introducao = '''
     Os dados foram divididos em quatro conjuntos de colunas, com base na origem das informações.
     '''
-
     st.markdown(introducao)
-
-    #with col1:
+    #with st.expander("Heatmap"):
     st.header("Antes de Ser Internado")
     st.info("Este conjunto contém as colunas que representam os dados do paciente antes de sua admissão no hospital.")
 
