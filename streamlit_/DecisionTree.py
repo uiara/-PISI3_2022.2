@@ -10,7 +10,7 @@ import seaborn as sns
 @st.cache_data
 def load_data():
 
-    data = pd.read_parquet("dataset_renomeado_sem_nulos.parquet")
+    data = pd.read_parquet("data/dataset_renomeado_sem_nulos.parquet")
     colunas_deletar = ['id_ncontro', 'id_paciente', 'id_hospital','id_uti']
     data = data.drop(columns=colunas_deletar)
     return data
