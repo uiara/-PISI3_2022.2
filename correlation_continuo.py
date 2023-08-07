@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
-data = pd.read_csv('data/dataset_renomeado_onehot_sem_nulos.csv')
+data = pd.read_csv('data/dataset_renomeado_onehot_nonull.csv')
 
 # Separar features e rótulo alvo
 X = data.drop(columns=['probabilidade_morte_na_uti_(apache_4a)'])

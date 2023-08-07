@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
-data = pd.read_csv('dataset_renomeado_onehot_sem_nulos.csv')
+data = pd.read_csv('data/dataset_renomeado_onehot_nonull.csv')
 
 # Separar features e rótulo alvo
 X = data.drop(columns=['morte_hospital'])

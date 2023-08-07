@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-df = pd.read_csv('data/dataset_renomeado_onehot_sem_nulos.csv')
+df = pd.read_csv('data/dataset_renomeado_onehot_nonull.csv')
 #antes era: "probabilidade_morte_na_uti_(apache_4a)" novo: "tipo_estadia_uti_readmit" 68->61 
 df = df[['ventilado_apache','tipo_estadia_uti_readmit', 'd1_frequencia_cardiaca_maxima',
          'd1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima',

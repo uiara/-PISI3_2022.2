@@ -1,7 +1,7 @@
 import pandas as pd
 
-input_file = "dataset_renomeado_onehot.csv"
-output_file = "dataset_renomeado_mais_onehot.csv"
+input_file = "data/dataset_renomeado_onehot_nonull.csv"
+output_file = "dataset_renomeado+_onehot_nonull.csv"
 
 # Ler o arquivo CSV original
 df = pd.read_csv(input_file)
