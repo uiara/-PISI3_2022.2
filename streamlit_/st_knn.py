@@ -8,7 +8,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 def load_data():
-    return pd.read_parquet('C:/Users/A/Documents/PISI3_2022.2/data/dataset_renomeado.parquet')
+    return pd.read_csv('/home/bianka/PISI3_2022.2/data/dataset_renamed_onehot_nonull.csv')
+
 
 def preprocess_data(df):
     df = df[['ventilado_apache','probabilidade_morte_na_uti_(apache_4a)', 'd1_frequencia_cardiaca_maxima',
@@ -20,19 +21,18 @@ def preprocess_data(df):
     X = df.drop(['morte_hospital'], axis=1)
 
     return X, y
-
+'''
 def train_model(X_train, y_train):
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
 
-    knn_classifier = KNeighborsClassifier(n_neighbors=21)
+    knn_classifier = KNeighborsClassifier(n_neighbors=3)
     knn_classifier.fit(X_train_scaled, y_train)
 
     return knn_classifier
-
+'''
 def knn():
     st.title("Análise do Modelo k-Nearest Neighbors (k-NN)")
-
     df = load_data()
 
     # Pré-processar os dados
@@ -42,10 +42,12 @@ def knn():
         st.warning("Não há dados suficientes para treinar o modelo.")
         return
 
+    k_value = st.slider("Selecione o valor de k (n_neighbors):", min_value=1, max_value=20, value=3)
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    knn_classifier = train_model(X_train, y_train)
-
+    knn_classifier = KNeighborsClassifier(n_neighbors=k_value)  # Use the selected k_value
+    knn_classifier.fit(X_train, y_train)
     X_test_scaled = knn_classifier._validate_data(X_test, reset=False)
     y_pred = knn_classifier.predict(X_test_scaled)
 
@@ -59,10 +61,11 @@ def knn():
 
     st.subheader("Matriz de Confusão:")
     cm = confusion_matrix(y_test, y_pred)
-    fig, ax = plt.subplots()
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False)
-    plt.xlabel("Valor Preditos")
-    plt.ylabel("Valores Verdadeiros")
-    st.pyplot(fig)
+
+    st.write("Matriz de Confusão:")
+    st.write(cm)
+
+
+
 
 

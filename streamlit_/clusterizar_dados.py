@@ -8,7 +8,7 @@ def clusterizar_dados(data, n_clusters):
     return data
 
 
-df = pd.read_parquet('C:/Users/A/Documents/PISI3_2022.2/data/dataset_renomeado.parquet')
+df = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_renomeado.parquet')
 
 df = df[['ventilado_apache','probabilidade_morte_na_uti_(apache_4a)', 'd1_frequencia_cardiaca_maxima','d1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima','d1_spO2_minimo','d1_temperatura_minima', 'morte_hospital']]
 df = df.dropna()
