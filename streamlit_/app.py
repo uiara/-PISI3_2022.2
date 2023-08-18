@@ -3,6 +3,7 @@ from corr import pagina
 from app_clusterizacao import cluster
 from analise_grupos import grupos
 from st_knn import knn
+from DecisionTree import DecisionTree
 
 import streamlit as st
 import pandas as pd
@@ -81,7 +82,7 @@ pages = {
     'Página 4 - Análise em Conjuntos' : grupos,
     'Página 5 - Clusterização' : cluster,
     'Página 6 - KNN' : knn,
-    #'Página 6 - Primeiras Vinte Quatro Horas' : vinte_quatro,
+    'Página 7 - DecisionTree' : DecisionTree,
 }
 
 page = st.sidebar.selectbox('Selecione a página', tuple(pages.keys()))
