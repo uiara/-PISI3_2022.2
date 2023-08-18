@@ -13,4 +13,4 @@ data_cleaned = df.dropna(thresh=len(df) * (1 - threshold), axis=1)
 data_preenchido = df.fillna(df.median())
 
 # Salvar o novo conjunto de dados tratado
-data_preenchido.to_csv("data\decisionTree_dataset.csv", index=False)
+data_preenchido.to_parquet("data\decisionTree_dataset.parquet", index=False)
