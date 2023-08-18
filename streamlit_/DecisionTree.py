@@ -10,7 +10,7 @@ import seaborn as sns
 @st.cache_data
 def load_data():
 
-    data = pd.read_parquet("/home/bianka/PISI3_2022.2/data/dataset_renomeado_sem_nulos.parquet")
+    data = pd.read_csv("C:/Users/leogo/OneDrive/Área de Trabalho/PISI3_2022.2-main/data/decisionTree_dataset.csv")
     colunas_deletar = ['id_ncontro', 'id_paciente', 'id_hospital','id_uti']
     data = data.drop(columns=colunas_deletar)
     return data
