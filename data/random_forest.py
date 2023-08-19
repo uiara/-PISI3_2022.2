@@ -80,3 +80,42 @@ def categorize_temperatura(temp):
         return 'temperatura_minima_primieras_vinte_quatro_horas_normal'
     if temp >= 37:
         return 'temperatura_minima_primieras_vinte_quatro_horas_febre'
+    
+df['categoria_d1_temperatura_minima'] = df['d1_temperatura_minima'].apply(categorize_temperatura)
+
+one_hot_encoded = pd.get_dummies(df['categoria_d1_temperatura_minima'])
+
+df = pd.concat([df, one_hot_encoded], axis=1)
+
+df = df.drop('categoria_d1_temperatura_minima', axis=1)
+
+df = df.drop(['d1_frequencia_cardiaca_maxima',
+       'd1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima',
+       'd1_spO2_minimo', 'd1_temperatura_minima','tipo_estadia_uti'], axis=1)
+
+
+X = df.iloc[:, :-1]  
+y = df.iloc[:, -1]  
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+
+random_forest = RandomForestClassifier(n_estimators=100, random_state=42)
+
+random_forest.fit(X_train, y_train)
+
+# Fazer previsões no conjunto de teste
+y_pred = random_forest.predict(X_test)
+
+# Calcular a acurácia das previsões
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+# Matriz de Confusão
+conf_matrix = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Relatório de Classificação
+class_report = classification_report(y_test, y_pred)
+print("Classification Report:")
+print(class_report)
