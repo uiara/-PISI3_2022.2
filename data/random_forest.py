@@ -31,3 +31,52 @@ one_hot_encoded = pd.get_dummies(df['categoria_fc_maxima'])
 df = pd.concat([df, one_hot_encoded], axis=1)
 
 df = df.drop('categoria_fc_maxima', axis=1)
+
+def categorizar_fr(fr):
+    if fr < 12:
+        return 'primeira_hora_frequencia_respiratoria_maxima_muito_baixa'
+    elif 12 <= fr < 16:
+        return 'primeira_hora_frequencia_respiratoria_maxima_baixa'
+    elif 16 <= fr < 20:
+        return 'primeira_hora_frequencia_respiratoria_maxima_normal'
+    elif 20 <= fr < 24:
+        return 'primeira_hora_frequencia_respiratoria_maxima_elevada'
+    else:
+        return 'primeira_hora_frequencia_respiratoria_maxima_muito elevada'
+
+df['categoria_frequencia_respiratoria_maxima'] = df['h1_frequencia_respiratoria_maxima'].apply(categorizar_fr)
+
+one_hot_encoded = pd.get_dummies(df['categoria_frequencia_respiratoria_maxima'])
+
+df = pd.concat([df, one_hot_encoded], axis=1)
+
+df = df.drop('categoria_frequencia_respiratoria_maxima', axis=1)
+
+df = df[~((df['d1_spO2_minimo'] <= 20))]
+
+def categorize_saturacao(sat):
+    if sat < 85:
+        return 'saturacao_primieras_vinte_quatro_horas_minima_muito_baixa'
+    elif sat < 90:
+        return 'saturacao_primieras_vinte_quatro_horas_minima_baixa'
+    elif sat < 95:
+        return 'saturacao_primieras_vinte_quatro_horas_minima_moderada'
+    elif sat < 100:
+        return 'saturacao_primieras_vinte_quatro_horas_minima_boa'
+
+
+df['categoria_d1_spO2_minimo'] = df['d1_spO2_minimo'].apply(categorizar_fr)
+
+one_hot_encoded = pd.get_dummies(df['categoria_d1_spO2_minimo'])
+
+df = pd.concat([df, one_hot_encoded], axis=1)
+
+df = df.drop('categoria_d1_spO2_minimo', axis=1)
+
+def categorize_temperatura(temp):
+    if temp < 35:
+        return 'temperatura_minima_primieras_vinte_quatro_horas_hipotermia'
+    if temp < 37:
+        return 'temperatura_minima_primieras_vinte_quatro_horas_normal'
+    if temp >= 37:
+        return 'temperatura_minima_primieras_vinte_quatro_horas_febre'
