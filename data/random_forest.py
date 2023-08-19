@@ -80,7 +80,7 @@ def categorize_temperatura(temp):
         return 'temperatura_minima_primieras_vinte_quatro_horas_normal'
     if temp >= 37:
         return 'temperatura_minima_primieras_vinte_quatro_horas_febre'
-    
+
 df['categoria_d1_temperatura_minima'] = df['d1_temperatura_minima'].apply(categorize_temperatura)
 
 one_hot_encoded = pd.get_dummies(df['categoria_d1_temperatura_minima'])
