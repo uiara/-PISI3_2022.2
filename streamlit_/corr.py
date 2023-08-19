@@ -7,7 +7,7 @@ import plotly.express as px
 
 
 def carregar_dados():
-    dados = pd.read_parquet('C:/Users/A/Documents/PISI3_2022.2/data/dataset_streamlit.parquet')
+    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
 
     return dados
 
