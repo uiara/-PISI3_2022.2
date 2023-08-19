@@ -106,7 +106,7 @@ random_forest.fit(X_train, y_train)
 # Fazer previsões no conjunto de teste
 y_pred = random_forest.predict(X_test)
 
-# Calcular a acurácia das previsões
+# Calcular a Acurácia das previsões
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 
