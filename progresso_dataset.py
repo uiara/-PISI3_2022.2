@@ -5,8 +5,8 @@ import pandas as pd
 data_original = pd.read_csv('data/dataset.csv')
 data_complete = pd.read_parquet('data/dataset_renomeado.parquet')  
 data_no_nulls = pd.read_parquet('data/dataset_renomeado_sem_nulos.parquet')  
-data_modified_nonull = pd.read_csv('data/dataset_renomeado_onehot_sem_nulos.csv')
-data_modified_filling = pd.read_csv('data/dataset_onehot_filling_renomeadas.csv')  
+data_modified_nonull = pd.read_csv('data/dataset_renamed_onehot_nonull.csv')
+data_modified_filling = pd.read_csv('data/dataset_renamed_onehot_filling.csv')  
 
 # Interface do Streamlit
 st.title('Visualização de Datasets em Diferentes Etapas de Normalização')
