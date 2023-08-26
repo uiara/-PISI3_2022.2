@@ -3,6 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
+from imblearn.under_sampling import RandomUnderSampler
+
+
 df = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_renomeado.parquet')
 df = df[['ventilado_apache','tipo_estadia_uti', 'd1_frequencia_cardiaca_maxima',
          'd1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima',
@@ -94,10 +97,16 @@ df = df.drop(['d1_frequencia_cardiaca_maxima',
        'd1_spO2_minimo', 'd1_temperatura_minima','tipo_estadia_uti'], axis=1)
 
 
-X = df.iloc[:, :-1]  
-y = df.iloc[:, -1]  
+y = df['morte_hospital']
+X = df.drop(['morte_hospital'], axis=1)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
+
+# Aplicar undersampling apenas nos dados de treinamento
+rus = RandomUnderSampler(sampling_strategy='auto', random_state=42)  
+X_train_resampled, y_train_resampled = rus.fit_resample(X_train, y_train)
+
+X_train_resampled, X_test, y_train_resampled, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
 
 random_forest = RandomForestClassifier(n_estimators=100, random_state=42)
 
