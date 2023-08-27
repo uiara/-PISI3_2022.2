@@ -1,38 +1,38 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
 
-# Carregando os datasets
-data_original = pd.read_csv('data/dataset.csv')
-data_complete = pd.read_parquet('data/dataset_renomeado.parquet')  
-data_nonull_onehot = pd.read_parquet('data/renomeado_nonull_onehot.parquet')  
-data_mediana_onehot = pd.read_parquet('data/renomeado_mediana_onehot.parquet')
-data_media_onehot = pd.read_parquet('data/renomeado_media_onehot.parquet')  
+# Carregar os dados
+data = pd.read_csv('data/dataset_renamed_onehot_nonull.csv')
 
-# Interface do Streamlit
-st.title('Visualização do dataset em diferentes etapas de Normalização.')
-selected_dataset = st.selectbox('Selecione um dataset:', ['Original','Renomeado', 'Modificado Onehot sem nulos', 'Modificado Onehot preenchimento por mediana', 'Modificado Onehot preenchimento por media'])
+# Separar features e rótulo alvo
+X = data.drop(columns=['morte_hospital'])
+y = data['morte_hospital'] 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-if selected_dataset == 'Original':
-    st.subheader('Dataset Original')
-    st.write(data_original)
-    st.write("Dataset original do kaggle 'Patient survival prediction' sem alterações podemos notar valores nulos e colunas de ID de pacientes ")
+# Treinar o modelo
+rf_model = RandomForestClassifier()
+rf_model.fit(X_train, y_train)
 
-elif selected_dataset == 'Renomeado':
-    st.subheader('Dataset Traduzido')
-    st.write(data_complete)
-    st.write("Dataset alterado, ainda com valores nulos mas com colunas traduzidas para o português.")
+# Calcular a importância das características
+feature_importance = rf_model.feature_importances_
+feature_importance_df = pd.DataFrame({'Feature': X_train.columns, 'Importance': feature_importance})
+feature_importance_df = feature_importance_df.sort_values(by='Importance', ascending=False)
 
-elif selected_dataset == 'Modificado Onehot sem nulos':
-    st.subheader('Dataset aplicado o método Onehot com remoção de linhas com valores nulos ')
-    st.write(data_nonull_onehot)
-    st.write("Dataset alterado, linhas com valores nulos são removidas, nota-se uma perda consideravel de linhas dessa maneira. Valores do tipo 'float' são convertidos para integrais, e é aplicado o método onehot em colunas categóricas; Essas colunas geradas são traduzidas.")
+# Criar página Streamlit
+st.title('Visualização da Importância das Características')
+st.write('Aqui estão as 10 características mais importantes para a previsão de mortalidade hospitalar:')
 
-elif selected_dataset == 'Modificado Onehot preenchimento por mediana':
-    st.subheader('Dataset aplicado o método Onehot com preenchimento de valores nulos por mediana')
-    st.write(data_mediana_onehot)
-    st.write("Dataset alterado, valores nulos são preenchidos com a mediana obtida de outros valores da coluna. Valores do tipo 'float' são convertidos para integrais, e é aplicado o método onehot em colunas categóricas; Essas colunas geradas são traduzidas.")
+top_10_features = feature_importance_df.head(10)
+st.dataframe(top_10_features)
 
-elif selected_dataset == 'Modificado Onehot preenchimento por media':
-    st.subheader('Dataset aplicado método Onehot com preenchimento de valores nulos  por media')
-    st.write(data_media_onehot)
-    st.write("Dataset alterado, valores nulos são preenchidos com a média obtida de outros valores da coluna na visualização pode ser notada a repetição excessiva de certos valores como idade e peso. Valores do tipo 'float' são convertidos para integrais, e é aplicado o método onehot em colunas categóricas; Essas colunas geradas são traduzidas .")
+# Gráfico de barras
+st.write('Gráfico de Importância das Características')
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Importance', y='Feature', data=top_10_features)
+plt.xlabel('Importância')
+plt.ylabel('Características')
+st.pyplot(plt)
