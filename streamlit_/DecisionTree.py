@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from imblearn.under_sampling import RandomUnderSampler
+from imblearn.combine import SMOTEENN  # Combinação de SMOTE e ENN
 
 
 
@@ -15,12 +15,9 @@ from imblearn.under_sampling import RandomUnderSampler
 def load_data():
 
     data = pd.read_parquet("C:/Users/leogo/OneDrive/Área de Trabalho/PISI3_2022.2-main/data/decisionTree_dataset.parquet")
-    colunas_deletar = ['id_ncontro','id_paciente','id_hospital','id_uti','altura','peso','cirurgia_eletiva','genero_M'
-                       ,'etnia_Asian','etnia_Caucasian','etnia_Hispanic','etnia_Native American','etnia_Other/Unknown'
-                       ,'tipo_uti_CSICU','tipo_uti_CTICU','tipo_uti_Cardiac ICU','tipo_uti_MICU','tipo_uti_Med-Surg ICU'
-                       ,'tipo_uti_Neuro ICU', 'tipo_uti_SICU','gcs_olhos_apache','gcs_motor_apache','gcs_incapaz_apache'
-                       ,'gcs_verbal_pache','arf_apache']
-    data = data.drop(columns=colunas_deletar)
+    data = data[['ventilado_apache','d1_frequencia_cardiaca_maxima',
+         'd1_frequencia_cardiaca_minima', 'h1_frequencia_respiratoria_maxima','h1_frequencia_respiratoria_minima',
+         'd1_spO2_maximo', 'd1_spO2_minimo','d1_temperatura_maxima','d1_temperatura_minima', 'morte_hospital']]
     return data
 
 
@@ -35,16 +32,16 @@ def DecisionTree():
     data = load_data()
 
     # Selecionar colunas para recursos e alvo
-    features = st.sidebar.multiselect("Selecione as colunas de recursos", data.columns, "imc")
+    features = st.sidebar.multiselect("Selecione as colunas de recursos", data.columns, 'morte_hospital')
     target = "morte_hospital"
 
     # Dividir o conjunto de dados em treinamento e teste
     X_train, X_test, y_train, y_test = train_test_split(data[features], data[target], test_size=0.2, random_state=42)
 
 
-    # Aplicar undersampling nas classes majoritárias
-    undersampler = RandomUnderSampler(random_state=42)
-    X_resampled, y_resampled = undersampler.fit_resample(X_train, y_train)
+    # Aplicar combinação de undersampling na classe majoritária e oversampling na classe minoritária
+    sampler = SMOTEENN(sampling_strategy='auto', random_state=42)
+    X_resampled, y_resampled = sampler.fit_resample(X_train, y_train)
 
 
     # Hiperparâmetros
