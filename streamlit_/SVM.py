@@ -60,17 +60,3 @@ def svm():
     plt.xlabel("Previsto")
     plt.ylabel("Real")
     st.pyplot(plt)
-
-    # Previsão para um exemplo
-    st.sidebar.title("Previsão para um Exemplo")
-    example = {}
-    for feature in X.columns:
-        example[feature] = st.sidebar.number_input(f"Insira o valor para {feature}", min_value=0)
-
-    if st.sidebar.button("Prever"):
-        example_df = pd.DataFrame([example])
-        prediction = model.predict(example_df)
-        if prediction[0] == 0:
-            st.sidebar.write("Previsão: Sobreviveu")
-        else:
-            st.sidebar.write("Previsão: Morreu")
