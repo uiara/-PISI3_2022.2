@@ -1,19 +1,10 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import classification_report, confusion_matrix
-import streamlit as st
-import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, precision_score, recall_score, f1_score
-import plotly.express as px
+from sklearn.metrics import classification_report, precision_score, recall_score, f1_score
 
 st.title('Classificação com Naive Bayes e Random Forest')
 
@@ -44,32 +35,24 @@ def train_random_forest():
 
 nb_model = train_naive_bayes()
 rf_model = train_random_forest()
-
-y_pred = nb_model.predict(X_test)
+y_pred_nb = nb_model.predict(X_test)
 y_pred_rf = rf_model.predict(X_test)
-
 st.subheader('Relatório de Classificação (Naive Bayes):')
-report_nb = classification_report(y_test, y_pred)
+report_nb = classification_report(y_test, y_pred_nb)
 st.text(report_nb)
+st.subheader('Relatório de Classificação (Random Forest):')
+report_rf = classification_report(y_test, y_pred_rf)
+st.text(report_rf)
 
-st.subheader('Matriz de Confusão (Naive Bayes):')
-cm_nb = confusion_matrix(y_test, y_pred)
-fig_nb, ax_nb = plt.subplots()
-sns.heatmap(cm_nb, annot=True, fmt="d", cmap="YlGnBu", cbar=False, square=True, ax=ax_nb) 
-ax_nb.set_xlabel('Previsto', fontsize=12)
-ax_nb.set_ylabel('Real', fontsize=12)
-ax_nb.set_title('Matriz de Confusão (Naive Bayes)', fontsize=16)
-st.pyplot(fig_nb)
-
-#métricas de desempenho para o Random Forest
+# desempenho para o Random Forest
 precision_rf = precision_score(y_test, y_pred_rf)
 recall_rf = recall_score(y_test, y_pred_rf)
 f1_rf = f1_score(y_test, y_pred_rf)
 
-#métricas de desempenho para o Naive Bayes
-precision_nb = precision_score(y_test, y_pred)
-recall_nb = recall_score(y_test, y_pred)
-f1_nb = f1_score(y_test, y_pred)
+# desempenho para o Naive Bayes
+precision_nb = precision_score(y_test, y_pred_nb)
+recall_nb = recall_score(y_test, y_pred_nb)
+f1_nb = f1_score(y_test, y_pred_nb)
 
 metrics_data = pd.DataFrame({
     'Métrica': ['Precisão', 'Recall', 'F1-Score'],
@@ -77,6 +60,12 @@ metrics_data = pd.DataFrame({
     'Random Forest': [precision_rf, recall_rf, f1_rf]
 })
 
-st.subheader('Box Plots das Métricas de Desempenho')
-fig_metrics = px.box(metrics_data, x='Métrica', y=['Naive Bayes', 'Random Forest'], title='Distribuição das Métricas de Desempenho')
-st.plotly_chart(fig_metrics)
+# gráfico de barras para comparar 
+st.subheader('Comparação das Métricas de Desempenho')
+fig, ax = plt.subplots()
+metrics_data.set_index('Métrica').plot(kind='bar', ax=ax)
+plt.xticks(rotation=0)
+plt.xlabel('Métrica')
+plt.ylabel('Valor')
+plt.title('Comparação das Métricas de Desempenho entre Naive Bayes e Random Forest')
+st.pyplot(fig)
