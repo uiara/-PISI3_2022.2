@@ -1,18 +1,12 @@
+from path import load_data
+
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
-
-
-'''
-def carregar_dados():
-    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
-
-    return dados
-'''
-def grupos(df):
-    #df = carregar_dados()
+def grupos():
+    df = load_data()
 
     st.title("Análise em Conjuntos")
 
@@ -23,7 +17,7 @@ def grupos(df):
     st.write('Este é um gráfico de histograma que mostra a distribuição das idades e a mortalidade hospitalar.')
 
     fig = px.histogram(df[['idade','genero','morte_hospital','imc']].dropna(), x="idade", y="morte_hospital", color="genero",
-                   #marginal="violin", # or violin, rug
+                   marginal="violin", # or violin, rug
                    hover_data=df[['idade','genero','morte_hospital','imc']].columns)
     st.plotly_chart(fig)
 
@@ -51,3 +45,4 @@ def grupos(df):
     fig.update_yaxes(title_text="<b>Média de Mortes Hospitalares<b>")
     fig.update_xaxes(title_text="<b>Idade<b>")
     st.plotly_chart(fig)
+

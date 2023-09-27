@@ -1,3 +1,4 @@
+from path import load_data
 from dicionario_dados import dic
 from corr import pagina
 from app_clusterizacao import cluster
@@ -10,28 +11,18 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 st.set_page_config(layout="wide")
-
-
-
-def carregar_dados():
-    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
-    return dados
-
 
 def home():
     
-    dados = carregar_dados()
+    dados = load_data()
 
     st.header('Análise Exploratória de Dados')
 
-    # Variáveis quantitativas
     st.subheader('Variáveis Quantitativas')
     quantitativas = dados.select_dtypes(include=['int', 'float'])
     st.dataframe(quantitativas.describe())
 
-    # Variáveis categoricas
     st.subheader('Variáveis Categóricas')
     categoricas = dados.select_dtypes(include=['object'])
     st.dataframe(categoricas.describe())
@@ -73,6 +64,34 @@ def home():
         fig_scatter = px.scatter(dados, x=coluna_x, y=coluna_y, color=coluna_cor)
         st.plotly_chart(fig_scatter)
 
+    with st.expander("Gráfico de Bolha"):
+
+        st.title('Análise Dinâmica por Faixa Etária')
+
+        categorical_columns = dados.select_dtypes(include=['object']).columns
+        numeric_columns = dados.select_dtypes(include=['number']).columns
+
+        categorical_column = st.selectbox('Selecione a Coluna Categórica:', categorical_columns)
+
+        numeric_column = st.selectbox('Selecione a Coluna Numérica:', numeric_columns)
+
+        age_bins = [0, 30, 40, 50, 60, 70, 80, float('inf')]
+        age_labels = ['0-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80+']
+
+        # Atribua cada valor de idade a um intervalo e crie uma nova coluna 'faixa_etaria'
+        dados['faixa_etaria'] = pd.cut(dados['idade'], bins=age_bins, labels=age_labels)
+
+        # Agrupa e agrega os dados com base na coluna categórica escolhida e nas faixas etárias
+        df_grouped = dados.groupby([categorical_column, 'faixa_etaria']).mean().reset_index()
+        df_grouped['contagem'] = dados.groupby([categorical_column, 'faixa_etaria']).count().reset_index()['morte_hospital']
+
+        fig = px.scatter(df_grouped, x="faixa_etaria", y=numeric_column, size="contagem", color=categorical_column,
+                        hover_name=categorical_column, log_x=False, size_max=60)
+        fig.update_layout(title_text=f"<b>{numeric_column} por Faixa Etária<b>")
+        fig.update_yaxes(title_text=f"<b>{numeric_column}<b>")
+        fig.update_xaxes(title_text="<b>Faixa Etária<b>")
+
+        st.plotly_chart(fig)
 
 
 pages = {

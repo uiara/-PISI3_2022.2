@@ -1,19 +1,13 @@
+from path import load_data
+
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
-
-
-
-def carregar_dados():
-    dados = pd.read_parquet('/home/bianka/PISI3_2022.2/data/dataset_streamlit.parquet')
-
-    return dados
-
 def pagina():
-    df = carregar_dados()
-
+    df = load_data()
+    
     colunas_anterior_internamento = ['idade', 'imc', 'cirurgia_eletiva', 'etnia', 'genero', 'altura', 'aids', 'cirrose', 'diabetes_mellitus',
                             'insuficiencia_hepatica', 'imunossupressao', 'leucemia', 'linfoma', 'tumor_solido_com_metastase', 
                             'sistema_corporal_apache_3j', 'sistema_corporal_apache_2',
