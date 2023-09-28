@@ -3,7 +3,6 @@ from path import load_data
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import plotly.express as px
 
 def pagina():
     df = load_data()
@@ -119,7 +118,6 @@ def pagina():
         height=600)
     st.plotly_chart(fig)
 
-    #with col3:
     st.header("Primeira Hora de Internamento")
     st.text("Aqui estão as colunas que contêm os dados específicos coletados durante a primeira hora do paciente internado.")
 
@@ -137,7 +135,6 @@ def pagina():
         height=600)
     st.plotly_chart(fig)
 
-    #with col4:
     st.header("Primeiras Vinte e Quatro Horas de Internamento")
     st.text("Este conjunto de colunas engloba os dados coletados durante as primeiras vinte e quatro horas de internação do paciente.")
 
