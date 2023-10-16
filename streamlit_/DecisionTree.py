@@ -51,9 +51,9 @@ def DecisionTree():
 
     st.subheader("Matriz de Confusão")
     cm = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(2, 4))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
-    st.pyplot(plt)
+    #st.pyplot(plt)
 
 if __name__ == "__main__":
     DecisionTree()

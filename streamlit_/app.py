@@ -4,6 +4,9 @@ from corr import pagina
 from analise_grupos import grupos
 from st_knn import knn
 from DecisionTree import DecisionTree
+from gradientboosting import gradient
+from naive import nav
+from progresso_dataset import progresso
 
 import streamlit as st
 import pandas as pd
@@ -122,10 +125,13 @@ def home():
 pages = {
     'Página 1 - Introdução': home,
     'Página 2 - Dicionário': dic,
+    'Página - ': progresso,
     'Página 3 - Correlação/grafico de correlação' : pagina,
     'Página 4 - Análise em Conjuntos' : grupos,
-    'Página 6 - KNN' : knn,
-    'Página 7 - Árvore de Decisão' : DecisionTree,
+    'Página 5 - KNN' : knn,
+    'Página 6 - Árvore de Decisão' : DecisionTree,
+    'Página 7 - Gradient Boosting' : gradient,
+    'Página 8 - Naive Bayes' : nav
 }
 
 page = st.sidebar.selectbox('Selecione a página', tuple(pages.keys()))
