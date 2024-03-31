@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como parte da disciplina **Projeto Interdisciplina
 
 ## Descrição do Projeto
 
-O projeto utiliza o dataset disponível no [Kaggle](https://www.kaggle.com/competitions/patient-survival-prediction/data). Esse conjunto de dados contém informações sobre pacientes que foram internados em UTIs e inclui variáveis como idade, histórico médico, exames laboratoriais e outros fatores relevantes. A previsão de sobrevivência é importante para auxiliar na tomada de decisões sobre continuar o tratamento ou optar por cuidados paliativos.
+O projeto utiliza o dataset, Patient Survival Prediction, disponível no [Kaggle](https://www.kaggle.com/competitions/patient-survival-prediction/data). Esse conjunto de dados contém informações sobre pacientes que foram internados em UTIs e inclui variáveis como idade, histórico médico, exames laboratoriais e outros fatores relevantes. A previsão de sobrevivência é importante para auxiliar na tomada de decisões sobre continuar o tratamento ou optar por cuidados paliativos.
 
 ## Instruções de Instalação
 
