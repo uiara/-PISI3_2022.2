@@ -17,4 +17,3 @@ O projeto utiliza o dataset disponível no [Kaggle](https://www.kaggle.com/compe
 - **model**: Contém os modelos de machine learning treinados com os dados.
 - **streamlit**: Este diretório é dedicado à apresentação dos resultados por meio de uma aplicação Streamlit.
 
-Sinta-se à vontade para personalizar o README de acordo com as necessidades específicas do seu projeto. Se tiver alguma dúvida ou precisar de mais informações, estou à disposição! 🚀
